@@ -1,0 +1,68 @@
+name: VPS External Monitor
+
+# Probes 4 plyeyada domains + SSH port from GitHub-hosted runner (US/EU egress).
+# Cross-references with VPS-internal /var/log/pleyada-health.log to separate
+# H1 (VPS down — both internal+external FAIL) from H2 (RU-route blocked —
+# internal OK, external OK, but Maxim from RU=FAIL).
+#
+# task-id: vps-stability-diagnostic-monitoring-2026-05-09
+# chat-id: infra-vps-stability-monitoring-01
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'   # every 5 min
+  workflow_dispatch:
+
+permissions:
+  contents: write   # to commit logs/probes.csv
+
+concurrency:
+  group: external-monitor
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Probe domains + SSH port
+        id: probe
+        run: |
+          mkdir -p logs
+          TS=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          ZAVOD=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://zavod.smm-ministr.ru/ 2>/dev/null || echo "TIMEOUT")
+          SURVEY=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://survey.smm-ministr.ru/ 2>/dev/null || echo "TIMEOUT")
+          BRAND=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://brand.smm-ministr.ru/ 2>/dev/null || echo "TIMEOUT")
+          SMM=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://krutly.com/ 2>/dev/null || echo "TIMEOUT")
+          # SSH port reachability (TCP-only, no auth)
+          SSH=$(timeout 5 bash -c '</dev/tcp/5.129.207.254/22' 2>/dev/null && echo "OK" || echo "FAIL")
+          # nginx HTTPS port
+          PORT443=$(timeout 5 bash -c '</dev/tcp/5.129.207.254/443' 2>/dev/null && echo "OK" || echo "FAIL")
+          LINE="$TS,zavod=$ZAVOD,survey=$SURVEY,brand=$BRAND,smm=$SMM,ssh22=$SSH,tcp443=$PORT443"
+          echo "$LINE" >> logs/probes.csv
+          echo "line=$LINE" >> "$GITHUB_OUTPUT"
+          # Summary in run log
+          echo "## Probe at $TS" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          echo "$LINE" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit probes log
+        run: |
+          git config user.name "vps-monitor-bot"
+          git config user.email "vps-monitor-bot@users.noreply.github.com"
+          git add logs/probes.csv
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "probe ${{ steps.probe.outputs.line }}"
+            # Retry push on race (another probe committed first)
+            for i in 1 2 3; do
+              git pull --rebase origin main && git push origin main && break
+              sleep $((RANDOM % 5 + 1))
+            done
+          fi
