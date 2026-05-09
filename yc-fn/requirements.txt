@@ -1,0 +1,1 @@
+# No external deps — uses only Python 3.12 stdlib (urllib, socket, base64, json)

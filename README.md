@@ -1,17 +1,25 @@
-# vps-monitor — external probe для VPS 5.129.207.254
+# vps-monitor — external probes для VPS 5.129.207.254
 
-GitHub Actions workflow, который каждые 5 минут пингует 4 домена плеяды + SSH/443 порты VPS со стороны GitHub runner'а (US/EU egress) и пишет CSV в `logs/probes.csv`.
+**Два независимых vantage point** пингуют 4 домена плеяды + SSH/443 порты VPS каждые 5 минут:
 
-**Цель:** разделить гипотезы H1 (VPS down) vs H2 (RU-route blocked) для diagnostic'а chat-id `infra-vps-stability-monitoring-01`.
+| Vantage | Где работает | Output | Cron |
+|---|---|---|---|
+| **GitHub Actions** | Microsoft Azure DC (US/EU) | `logs/probes.csv` | `*/5 * * * *` |
+| **Yandex Cloud Function** | YC datacenters (РФ, ru-central1) | `logs/probes-ru.csv` | `0/5 * * * ? *` (Quartz) |
 
-## Логика разделения (cross-reference с VPS-internal /var/log/pleyada-health.log)
+**Цель triangulation:** разделить гипотезы H1 (VPS down — оба vantage FAIL) vs H2 (RU-route blocked — RU FAIL, US OK) для diagnostic'а chat-id `infra-vps-stability-monitoring-01`.
 
-| VPS-internal log | External (этот workflow) | Maxim из РФ | Гипотеза |
+## Логика triangulation (3 vantage points)
+
+| VPS-internal `pleyada-health.log` | External GitHub Actions (US/EU) `probes.csv` | YC Function (RU) `probes-ru.csv` | Гипотеза |
 |---|---|---|---|
 | FAIL | FAIL | FAIL | **H1 — VPS реально down** (OOM / crash) |
-| OK | OK | FAIL | **H2 — route from РФ blocked** (TSPU / провайдер) |
-| OK | FAIL | FAIL | Network между GitHub и VPS / nginx local issue |
+| OK | OK | FAIL | **H2 confirmed — route from РФ blocked** (TSPU / РФ-провайдер) |
+| OK | FAIL | OK | **H2-inverse** — route from non-RU blocked (rare) |
 | OK | OK | OK | Норма |
+| OK | FAIL | FAIL | Network upstream Timeweb или DNS issue |
+
+**Note про HTTP коды:** GitHub Actions использует `curl GET` → 200 для всех endpoints. YC Function использует `urllib HEAD` → может вернуть 405 (Method Not Allowed) для FastAPI endpoints (uvicorn не поддерживает HEAD на default routes). **Для liveness важно различие `TIMEOUT/5xx vs anything else`** — 4xx означает что сервер отвечает = alive.
 
 ## Setup (once, ~10 минут Maxim'у)
 
@@ -67,11 +75,35 @@ git pull
 grep "T18:0" logs/probes.csv | head -5
 ```
 
-## Cleanup / disable
+## Yandex Cloud Function (RU vantage) — setup и operations
+
+**Function:** `vps-monitor-ru` (id `d4esr5hbfer4196fdv0v` в folder `b1gte826dd4hvilbujvg`)
+**Service Account:** `vps-monitor-fn` (id `aje08etfrr9mn6kmb32b`) — роль `serverless.functions.invoker`
+**Trigger:** `vps-monitor-ru-5min` (id `a1sm9jvnselsm7t3e4po`) — cron `0/5 * * * ? *`
+**Source:** `yc-fn/index.py` (Python 3.12, stdlib only)
+**Env vars:** `GITHUB_TOKEN` (fine-grained PAT с Contents R/W на этот repo) + `GITHUB_REPO=lukonin33/vps-monitor`
+
+### Redeploy code (без потери env vars)
+
+⚠ **YC Functions: каждая version имеет immutable env block.** CLI redeploy с `--environment FOO=bar` ПОЛНОСТЬЮ заменяет env (не merge). Без флага = empty env, GITHUB_TOKEN потерян.
+
+**Правильный путь:**
+1. Открыть https://console.cloud.yandex.ru/folders/b1gte826dd4hvilbujvg/functions/functions/d4esr5hbfer4196fdv0v
+2. «Создать в редакторе» из последней version → upload code → save
+3. UI копирует env из previous version automatically
+
+**Production-grade fix:** перевести GITHUB_TOKEN на Yandex Lockbox (function reads at runtime через lockbox.payloadViewer SA role). Тогда CLI redeploy не теряет secret.
+
+### Cleanup / disable
 
 ```powershell
-# Disable workflow (но сохранить repo + история):
+# Disable GitHub Actions workflow:
 gh workflow disable vps-external-monitor.yml -R lukonin33/vps-monitor
+
+# Disable YC RU function (через CLI):
+& "C:\Users\lukon\yandex-cloud\bin\yc.exe" serverless trigger delete vps-monitor-ru-5min
+& "C:\Users\lukon\yandex-cloud\bin\yc.exe" serverless function delete vps-monitor-ru
+& "C:\Users\lukon\yandex-cloud\bin\yc.exe" iam service-account delete vps-monitor-fn
 
 # Полное удаление repo:
 gh repo delete lukonin33/vps-monitor --yes
@@ -79,10 +111,16 @@ gh repo delete lukonin33/vps-monitor --yes
 
 ## Cost
 
-GitHub Actions free tier для private repo:
+**GitHub Actions free tier** для private repo:
 - 2000 min/month free
 - Этот workflow: ~30 sec × 12 runs/hour × 24h × 30d = **~720 min/month** (≈36% бесплатной квоты)
-- Public repo — unlimited (можно перевести в public если CSV-логи не sensitive — они не sensitive, только http codes)
+- Public repo — unlimited
+
+**Yandex Cloud Functions free tier:**
+- 1M invocations/мес бесплатно
+- Function execution time free до 10 GB-секунд/мес
+- Этот function: 12 runs/hour × 24h × 30d = **8640 invocations/мес** (≈0.9% бесплатной квоты)
+- Function memory 128 MB × ~3 sec avg execution = ~3.2 GB-секунд/run × 8640 = ~27600 GB-сек/мес (превышает 10000 free → ~17600 GB-сек paid × $0.000006 = ~$0.10/мес). При оптимизации до <1 sec execution — полностью в free tier.
 
 ## Pattern Pack reference
 
