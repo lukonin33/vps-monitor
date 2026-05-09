@@ -120,3 +120,4 @@
 2026-05-09T21:11:28Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-09T21:16:27Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-09T21:21:36Z,zavod=TIMEOUT,survey=TIMEOUT,brand=TIMEOUT,smm=TIMEOUT,ssh22=FAIL,tcp443=FAIL
+2026-05-09T21:26:12Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
