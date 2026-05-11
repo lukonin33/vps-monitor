@@ -1,0 +1,16 @@
+Здравствуйте.
+
+VPS 5.129.207.254 (тариф Cloud NSK 40, нода kvmnvm-841) эпизодически недоступен по сети из РФ-сегмента: TLS handshake timeout для HTTPS-сайтов + SSH "Connection reset by peer" на ~5 минут. Восстанавливается само.
+
+Зафиксировал конкретный incident 2026-05-10 18:06:14 UTC с cross-vantage логами: RU-vantage из Yandex Cloud показал полную недоступность всех 4 HTTPS-сайтов + TCP-порты 22 и 443 = FAIL, при этом через 3 минуты GitHub Actions vantage из US/EU видел VPS полностью доступным. Это означает что VPS физически работал, а сетевой путь из РФ-сегмента был блокирован/недоступен ~5 минут.
+
+MTR-trace с самого VPS показывает периодические delays на upstream peering hop 212.164.50.113 (до 4 секунд при baseline 1ms) и hop 94.25.47.122 (до 1.1 сек). Это похоже на нестабильность вашего peering / edge router.
+
+Приложил детальный отчёт с таблицей MTR, cross-vantage CSV-логи всех vantage points за период и ссылку на public dashboard https://monitor.smm-ministr.ru/dashboard/ для актуального состояния.
+
+Прошу:
+1. Проверить нестабильность hop 212.164.50.113 (peering Timeweb или ближайший upstream)
+2. Проверить логи Timeweb monitoring/BGP для ноды kvmnvm-841 в окне 17:50–18:20 UTC 2026-05-10
+3. Если фильтрация / peering issue подтвердятся — возможна ли смена IP или migration на другую ноду?
+
+Готов предоставить дополнительные логи / mtr-traces по запросу. Мониторинг непрерывный, новые incidents буду присылать оперативно.
