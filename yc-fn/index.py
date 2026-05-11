@@ -4,12 +4,18 @@ Runs as Yandex Cloud Function on timer trigger every 5 min.
 Probes 4 plyeyada domains + SSH22 + TCP443, commits CSV to logs/probes-ru.csv
 in github.com/lukonin33/vps-monitor via Contents API.
 
+Optional: when VPS_CANDIDATE_IPS env var is set (comma-separated list of IPs),
+also probes each candidate via TCP 22 + TCP 443 and commits to a separate
+file logs/probes-candidates.csv. Used for Phase 6.5 — testing new IPs before
+migrating DNS off the old one.
+
 chat-id: infra-vps-stability-monitoring-01
 task-id: vps-stability-diagnostic-monitoring-2026-05-09
 
-Env vars required:
-  GITHUB_TOKEN — fine-grained PAT, scope: lukonin33/vps-monitor → Contents R/W
-  GITHUB_REPO  — lukonin33/vps-monitor (default)
+Env vars:
+  GITHUB_TOKEN       — fine-grained PAT, scope: lukonin33/vps-monitor → Contents R/W (required)
+  GITHUB_REPO        — lukonin33/vps-monitor (default)
+  VPS_CANDIDATE_IPS  — comma-separated extra IPs to probe (e.g. "5.129.X.Y,31.130.X.Y"). Empty = skip.
 """
 import base64
 import datetime
@@ -33,7 +39,14 @@ TCP_TIMEOUT = 3
 
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 GITHUB_REPO = os.environ.get("GITHUB_REPO", "lukonin33/vps-monitor")
-CSV_PATH = "logs/probes-ru.csv"
+CSV_PATH_MAIN = "logs/probes-ru.csv"
+CSV_PATH_CANDIDATES = "logs/probes-candidates.csv"
+
+
+def parse_candidate_ips() -> list[str]:
+    """Read VPS_CANDIDATE_IPS env, return list of cleaned IPs (drops empty/whitespace)."""
+    raw = os.environ.get("VPS_CANDIDATE_IPS", "")
+    return [ip.strip() for ip in raw.split(",") if ip.strip()]
 
 
 def probe_http(url: str) -> str:
@@ -59,8 +72,8 @@ def probe_tcp(host: str, port: int) -> str:
         return "FAIL"
 
 
-def run_all_probes() -> dict[str, str]:
-    """Run all 6 probes in parallel. Worst-case wall = max(HTTP_TIMEOUT, TCP_TIMEOUT) ~ 5s."""
+def run_main_probes() -> dict[str, str]:
+    """Probe 4 HTTPS domains + 2 TCP ports on current VPS in parallel."""
     results: dict[str, str] = {}
     with ThreadPoolExecutor(max_workers=8) as ex:
         http_futures = {name: ex.submit(probe_http, url) for name, url in DOMAINS.items()}
@@ -69,6 +82,19 @@ def run_all_probes() -> dict[str, str]:
             results[name] = fut.result()
         for name, fut in tcp_futures.items():
             results[name] = fut.result()
+    return results
+
+
+def run_candidate_probes(ips: list[str]) -> dict[str, str]:
+    """For each candidate IP, probe TCP 22 + TCP 443 in parallel. Returns dict keyed by '<ip>_<port>'."""
+    results: dict[str, str] = {}
+    with ThreadPoolExecutor(max_workers=max(2 * len(ips), 2)) as ex:
+        futures = {}
+        for ip in ips:
+            futures[f"{ip}_22"] = ex.submit(probe_tcp, ip, 22)
+            futures[f"{ip}_443"] = ex.submit(probe_tcp, ip, 443)
+        for key, fut in futures.items():
+            results[key] = fut.result()
     return results
 
 
@@ -114,32 +140,65 @@ def github_put_file(token: str, repo: str, path: str, new_content: str, sha: str
         return resp.status
 
 
+def commit_csv_line(token: str, repo: str, path: str, line: str, commit_msg: str) -> None:
+    """Append line to CSV file in repo, retry on 409 race. Raises on persistent failure."""
+    last_error: Exception | None = None
+    for attempt in range(3):
+        try:
+            sha, current = github_get_file(token, repo, path)
+            new_content = current + line + "\n" if current else line + "\n"
+            github_put_file(token, repo, path, new_content, sha, message=commit_msg)
+            return
+        except urllib.error.HTTPError as e:
+            last_error = e
+            if e.code == 409 and attempt < 2:
+                continue
+            raise
+    if last_error:
+        raise last_error
+
+
 def handler(event, context):
     if not GITHUB_TOKEN:
         return {"statusCode": 500, "body": "GITHUB_TOKEN env var not set"}
 
     ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    results = run_all_probes()
+    candidate_ips = parse_candidate_ips()
 
-    # Stable column order: same as DOMAINS + TCP_PORTS for human readability
-    ordered_keys = list(DOMAINS.keys()) + list(TCP_PORTS.keys())
-    line = f"{ts}," + ",".join(f"{k}={results[k]}" for k in ordered_keys)
+    # --- Main probe (existing schema, dashboard compat) ---
+    main_results = run_main_probes()
+    main_keys = list(DOMAINS.keys()) + list(TCP_PORTS.keys())
+    main_line = f"{ts}," + ",".join(f"{k}={main_results[k]}" for k in main_keys)
 
-    # Commit to GitHub. Retry with fresh sha if 409 (race with another invocation).
-    for attempt in range(3):
+    # --- Candidate probe (only if VPS_CANDIDATE_IPS is set) ---
+    candidate_line: str | None = None
+    if candidate_ips:
+        cand_results = run_candidate_probes(candidate_ips)
+        # Stable column order: for each IP, port 22 then port 443
+        parts = [f"ips={'|'.join(candidate_ips)}"]
+        for ip in candidate_ips:
+            parts.append(f"{ip}_22={cand_results[f'{ip}_22']}")
+            parts.append(f"{ip}_443={cand_results[f'{ip}_443']}")
+        candidate_line = f"{ts}," + ",".join(parts)
+
+    # --- Commit both (separate files, separate commits) ---
+    bodies = []
+    try:
+        commit_csv_line(GITHUB_TOKEN, GITHUB_REPO, CSV_PATH_MAIN, main_line, f"ru-probe {main_line}")
+        bodies.append(f"main: {main_line}")
+    except urllib.error.HTTPError as e:
+        return {"statusCode": e.code, "body": f"github main error: {e.code} {e.reason}"}
+    except Exception as e:
+        return {"statusCode": 500, "body": f"main exception: {type(e).__name__}: {e}"}
+
+    if candidate_line:
         try:
-            sha, current = github_get_file(GITHUB_TOKEN, GITHUB_REPO, CSV_PATH)
-            new_content = current + line + "\n" if current else line + "\n"
-            github_put_file(
-                GITHUB_TOKEN, GITHUB_REPO, CSV_PATH, new_content, sha,
-                message=f"ru-probe {line}",
-            )
-            return {"statusCode": 200, "body": line}
+            commit_csv_line(GITHUB_TOKEN, GITHUB_REPO, CSV_PATH_CANDIDATES, candidate_line, f"cand-probe {candidate_line}")
+            bodies.append(f"candidates: {candidate_line}")
         except urllib.error.HTTPError as e:
-            if e.code == 409 and attempt < 2:
-                continue
-            return {"statusCode": e.code, "body": f"github error: {e.code} {e.reason}"}
+            # Don't fail the whole invocation if candidate write fails
+            bodies.append(f"candidates failed: github {e.code} {e.reason}")
         except Exception as e:
-            return {"statusCode": 500, "body": f"exception: {type(e).__name__}: {e}"}
+            bodies.append(f"candidates failed: {type(e).__name__}: {e}")
 
-    return {"statusCode": 500, "body": "unreachable"}
+    return {"statusCode": 200, "body": " | ".join(bodies)}
