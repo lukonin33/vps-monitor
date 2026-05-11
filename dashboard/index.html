@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPS 5.129.207.254 — Stability Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js" crossorigin="anonymous"></script>
+<style>
+  :root {
+    --ok: #22c55e;
+    --warn: #f59e0b;
+    --fail: #ef4444;
+    --bg: #0f172a;
+    --panel: #1e293b;
+    --text: #e2e8f0;
+    --dim: #94a3b8;
+    --border: #334155;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    line-height: 1.5; padding: 16px;
+  }
+  header { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+  h1 { font-size: 20px; font-weight: 600; }
+  h2 { font-size: 14px; font-weight: 600; color: var(--dim); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .controls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .controls label { font-size: 13px; color: var(--dim); }
+  select, button {
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 10px; font-size: 13px; cursor: pointer;
+  }
+  button:hover { border-color: var(--text); }
+  .status-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px; margin-bottom: 16px; }
+  .status-card { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+  .status-card .label { font-size: 11px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .status-card .value { font-size: 18px; font-weight: 600; }
+  .status-card .meta { font-size: 11px; color: var(--dim); margin-top: 4px; }
+  .status-card .summary { font-family: ui-monospace, monospace; margin-top: 6px; font-size: 10px; color: var(--dim); }
+  .status-card.ok { border-left: 3px solid var(--ok); }
+  .status-card.warn { border-left: 3px solid var(--warn); }
+  .status-card.fail { border-left: 3px solid var(--fail); }
+  .panels { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 16px; }
+  .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 16px; }
+  .chart-box { position: relative; height: 240px; }
+  .matrix { overflow-x: auto; }
+  .matrix table { width: 100%; border-collapse: collapse; font-size: 11px; font-family: ui-monospace, monospace; }
+  .matrix th, .matrix td { padding: 4px 6px; border: 1px solid var(--border); text-align: center; }
+  .matrix th { background: var(--bg); position: sticky; top: 0; }
+  .matrix td.cell-ok { background: rgba(34, 197, 94, 0.25); }
+  .matrix td.cell-warn { background: rgba(245, 158, 11, 0.25); color: #fbbf24; }
+  .matrix td.cell-fail { background: rgba(239, 68, 68, 0.4); color: #fecaca; font-weight: 600; }
+  .matrix td.cell-na { color: var(--dim); }
+  .matrix td.ts { text-align: left; white-space: nowrap; color: var(--dim); padding-right: 12px; }
+  .legend { display: flex; gap: 12px; font-size: 11px; color: var(--dim); margin-top: 8px; flex-wrap: wrap; }
+  .legend span::before { content: "■"; margin-right: 4px; }
+  .legend .ok::before { color: var(--ok); }
+  .legend .warn::before { color: var(--warn); }
+  .legend .fail::before { color: var(--fail); }
+  .err { background: rgba(239, 68, 68, 0.15); border: 1px solid var(--fail); color: #fecaca; padding: 12px; border-radius: 6px; margin: 8px 0; font-family: ui-monospace, monospace; font-size: 12px; }
+  footer { margin-top: 24px; font-size: 11px; color: var(--dim); text-align: center; }
+  footer a { color: #60a5fa; }
+  footer code { background: var(--panel); padding: 2px 4px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>VPS 5.129.207.254 — Stability Dashboard</h1>
+  <div class="controls">
+    <label>Time range:</label>
+    <select id="range">
+      <option value="3">Last 3h</option>
+      <option value="6">Last 6h</option>
+      <option value="24" selected>Last 24h</option>
+      <option value="168">Last 7d</option>
+      <option value="0">All</option>
+    </select>
+    <label>Auto-refresh:</label>
+    <select id="refresh">
+      <option value="0">Off</option>
+      <option value="60" selected>60s</option>
+      <option value="300">5min</option>
+    </select>
+    <button id="reload">Reload now</button>
+  </div>
+</header>
+
+<div id="errors"></div>
+
+<section>
+  <h2>Liveness — last probe per vantage</h2>
+  <div class="status-bar" id="statusBar"></div>
+</section>
+
+<section class="panels">
+  <div class="panel">
+    <h2>GitHub Actions (US/EU vantage) — every 5min</h2>
+    <div class="chart-box"><canvas id="chartGA"></canvas></div>
+    <div class="legend">
+      <span class="ok">200/3xx — alive</span>
+      <span class="warn">4xx — alive (response)</span>
+      <span class="fail">5xx / TIMEOUT — down</span>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Yandex Cloud Function (RU vantage) — every 5min</h2>
+    <div class="chart-box"><canvas id="chartYC"></canvas></div>
+    <div class="legend">
+      <span class="ok">200/3xx — alive</span>
+      <span class="warn">4xx — alive (response)</span>
+      <span class="fail">5xx / TIMEOUT — down</span>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top: 16px;">
+  <div class="panel">
+    <h2>Triangulation matrix — H1 vs H2 hypothesis discriminator</h2>
+    <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
+      Last 30 timestamps. Both red = H1 (VPS down). Only RU red = H2 (RU-route blocked). Only US red = H2-inverse (rare).
+    </p>
+    <div class="matrix" id="matrix"></div>
+  </div>
+</section>
+
+<footer>
+  Source: <a href="https://github.com/lukonin33/vps-monitor" target="_blank" rel="noopener">github.com/lukonin33/vps-monitor</a> |
+  chat-id: <code>infra-vps-stability-monitoring-01</code> |
+  task-id: <code>vps-stability-diagnostic-monitoring-2026-05-09</code>
+</footer>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const SOURCES = {
+  ga: { url: '../logs/probes.csv',    label: 'US/EU (GitHub Actions)' },
+  yc: { url: '../logs/probes-ru.csv', label: 'RU (Yandex Cloud)' },
+};
+const ENDPOINT_KEYS = ['zavod', 'survey', 'brand', 'smm', 'ssh22', 'tcp443'];
+const COLORS = {
+  zavod:  '#60a5fa',
+  survey: '#a78bfa',
+  brand:  '#f472b6',
+  smm:    '#34d399',
+  ssh22:  '#fbbf24',
+  tcp443: '#fb7185',
+};
+
+// ============================================================
+// CSV PARSING — strict types, no interpolation into HTML
+// ============================================================
+async function fetchCsv(url) {
+  const resp = await fetch(`${url}?_=${Date.now()}`);
+  if (!resp.ok) throw new Error(`fetch ${url} -> ${resp.status} ${resp.statusText}`);
+  return resp.text();
+}
+
+function parseCsvLine(line) {
+  // Format: 2026-05-09T11:17:04Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
+  const parts = line.trim().split(',');
+  if (parts.length < 2) return null;
+  const ts = new Date(parts[0]);
+  if (isNaN(ts)) return null;
+  const values = {};
+  for (const p of parts.slice(1)) {
+    const eqIdx = p.indexOf('=');
+    if (eqIdx === -1) continue;
+    const k = p.substring(0, eqIdx).trim();
+    const v = p.substring(eqIdx + 1).trim();
+    if (k && v) values[k] = v;
+  }
+  return { ts, values };
+}
+
+function parseCsv(text) {
+  return text.split('\n').map(parseCsvLine).filter(Boolean);
+}
+
+// ============================================================
+// HEALTH CLASSIFICATION
+// ============================================================
+function classify(value) {
+  if (value === 'OK') return 'ok';
+  if (value === 'FAIL' || value === 'TIMEOUT' || value.startsWith('ERR_')) return 'fail';
+  const code = parseInt(value, 10);
+  if (isNaN(code)) return 'na';
+  if (code >= 200 && code < 400) return 'ok';
+  if (code >= 400 && code < 500) return 'warn';
+  return 'fail';
+}
+
+function yPos(value) {
+  const c = classify(value);
+  return c === 'ok' ? 2 : c === 'warn' ? 1 : c === 'fail' ? 0 : null;
+}
+
+// ============================================================
+// SAFE DOM HELPERS — no innerHTML for variable data
+// ============================================================
+function el(tag, opts = {}, children = []) {
+  const node = document.createElement(tag);
+  if (opts.cls) node.className = opts.cls;
+  if (opts.text !== undefined) node.textContent = String(opts.text);
+  if (opts.title !== undefined) node.title = String(opts.title);
+  if (opts.attrs) for (const [k, v] of Object.entries(opts.attrs)) node.setAttribute(k, String(v));
+  for (const c of children) if (c) node.appendChild(c);
+  return node;
+}
+
+function clear(node) { while (node.firstChild) node.removeChild(node.firstChild); }
+
+// ============================================================
+// FILTERING & RENDERING
+// ============================================================
+function filterByRange(rows, hours) {
+  if (!hours) return rows;
+  const cutoff = Date.now() - hours * 3600 * 1000;
+  return rows.filter(r => r.ts.getTime() >= cutoff);
+}
+
+const charts = {};
+function renderChart(canvasId, rows) {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  if (charts[canvasId]) charts[canvasId].destroy();
+
+  const datasets = ENDPOINT_KEYS.map(key => ({
+    label: key,
+    data: rows.map(r => ({ x: r.ts, y: yPos(r.values[key] || 'NA') })).filter(p => p.y !== null),
+    borderColor: COLORS[key],
+    backgroundColor: COLORS[key],
+    borderWidth: 1.5,
+    pointRadius: 2,
+    pointHoverRadius: 5,
+    tension: 0,
+    stepped: true,
+  }));
+
+  charts[canvasId] = new Chart(ctx, {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12 } },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const row = rows[ctx.dataIndex];
+              return row ? `${ctx.dataset.label}: ${row.values[ctx.dataset.label] || 'NA'}` : '';
+            },
+          },
+        },
+      },
+      scales: {
+        x: { type: 'time', time: { tooltipFormat: 'yyyy-MM-dd HH:mm' }, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: '#334155' } },
+        y: {
+          min: -0.3, max: 2.3,
+          ticks: {
+            color: '#94a3b8', font: { size: 10 },
+            callback: v => ({ 0: 'fail', 1: '4xx', 2: 'ok' }[v] || ''),
+            stepSize: 1,
+          },
+          grid: { color: '#334155' },
+        },
+      },
+    },
+  });
+}
+
+function makeStatusCard(label, row) {
+  const v = row?.values || {};
+  const states = ENDPOINT_KEYS.map(k => classify(v[k] || 'NA'));
+  const failCount = states.filter(s => s === 'fail').length;
+  const cls = failCount === 0 ? 'ok' : failCount >= 3 ? 'fail' : 'warn';
+  const ago = row ? Math.round((Date.now() - row.ts.getTime()) / 60000) : null;
+  const summary = ENDPOINT_KEYS.map(k => `${k}=${v[k] || 'NA'}`).join(' ');
+  return el('div', { cls: `status-card ${cls}` }, [
+    el('div', { cls: 'label', text: label }),
+    el('div', { cls: 'value', text: failCount === 0 ? '✓ All up' : `${failCount}/${ENDPOINT_KEYS.length} down` }),
+    el('div', { cls: 'meta', text: row ? `${row.ts.toISOString().substring(11, 19)}Z (${ago}m ago)` : 'no data' }),
+    el('div', { cls: 'summary', text: summary }),
+  ]);
+}
+
+function makeTriangulationCard(lastGa, lastYc) {
+  if (!lastGa || !lastYc) {
+    return el('div', { cls: 'status-card warn' }, [
+      el('div', { cls: 'label', text: 'Triangulation' }),
+      el('div', { cls: 'value', text: 'no data' }),
+    ]);
+  }
+  const gaFail = ENDPOINT_KEYS.some(k => classify(lastGa.values[k] || 'NA') === 'fail');
+  const ycFail = ENDPOINT_KEYS.some(k => classify(lastYc.values[k] || 'NA') === 'fail');
+  let verdict, cls;
+  if (gaFail && ycFail) { verdict = 'H1 — VPS down'; cls = 'fail'; }
+  else if (!gaFail && ycFail) { verdict = 'H2 — RU route blocked'; cls = 'warn'; }
+  else if (gaFail && !ycFail) { verdict = 'H2-inverse (rare)'; cls = 'warn'; }
+  else { verdict = '✓ Norm'; cls = 'ok'; }
+  return el('div', { cls: `status-card ${cls}` }, [
+    el('div', { cls: 'label', text: 'Triangulation' }),
+    el('div', { cls: 'value', text: verdict }),
+    el('div', { cls: 'meta', text: 'latest probes cross-reference' }),
+  ]);
+}
+
+function renderStatusBar(gaRows, ycRows) {
+  const bar = document.getElementById('statusBar');
+  clear(bar);
+  const lastGa = gaRows[gaRows.length - 1];
+  const lastYc = ycRows[ycRows.length - 1];
+  bar.appendChild(makeStatusCard('US/EU vantage', lastGa));
+  bar.appendChild(makeStatusCard('RU vantage', lastYc));
+  bar.appendChild(makeTriangulationCard(lastGa, lastYc));
+}
+
+function renderMatrix(gaRows, ycRows) {
+  const allTs = [...new Set([...gaRows, ...ycRows].map(r => r.ts.getTime()))].sort((a, b) => b - a).slice(0, 30);
+  const gaByTs = new Map(gaRows.map(r => [r.ts.getTime(), r.values]));
+  const ycByTs = new Map(ycRows.map(r => [r.ts.getTime(), r.values]));
+
+  const table = el('table');
+  const thead = el('thead');
+
+  const headerRow1 = el('tr', {}, [el('th', { text: 'UTC' })]);
+  for (const k of ENDPOINT_KEYS) headerRow1.appendChild(el('th', { text: k, attrs: { colspan: 2 } }));
+  thead.appendChild(headerRow1);
+
+  const headerRow2 = el('tr', {}, [el('th')]);
+  for (let i = 0; i < ENDPOINT_KEYS.length; i++) {
+    headerRow2.appendChild(el('th', { text: 'US' }));
+    headerRow2.appendChild(el('th', { text: 'RU' }));
+  }
+  thead.appendChild(headerRow2);
+  table.appendChild(thead);
+
+  const tbody = el('tbody');
+  for (const ts of allTs) {
+    const date = new Date(ts);
+    const ga = gaByTs.get(ts) || {};
+    const yc = ycByTs.get(ts) || {};
+    const tr = el('tr', {}, [el('td', { cls: 'ts', text: date.toISOString().substring(5, 19).replace('T', ' ') })]);
+    for (const k of ENDPOINT_KEYS) {
+      for (const src of [ga, yc]) {
+        const val = src[k];
+        if (val === undefined) {
+          tr.appendChild(el('td', { cls: 'cell-na', text: '·' }));
+        } else {
+          tr.appendChild(el('td', { cls: `cell-${classify(val)}`, text: val, title: `${k}=${val}` }));
+        }
+      }
+    }
+    tbody.appendChild(tr);
+  }
+  table.appendChild(tbody);
+
+  const matrixDiv = document.getElementById('matrix');
+  clear(matrixDiv);
+  matrixDiv.appendChild(table);
+}
+
+// ============================================================
+// MAIN
+// ============================================================
+function showError(msg) {
+  document.getElementById('errors').appendChild(el('div', { cls: 'err', text: msg }));
+}
+
+async function refresh() {
+  clear(document.getElementById('errors'));
+  const hours = parseInt(document.getElementById('range').value, 10);
+
+  let gaRows = [], ycRows = [];
+  try { gaRows = parseCsv(await fetchCsv(SOURCES.ga.url)); }
+  catch (e) { showError(`GA load failed: ${e.message}`); }
+  try { ycRows = parseCsv(await fetchCsv(SOURCES.yc.url)); }
+  catch (e) { showError(`YC load failed: ${e.message}`); }
+
+  const gaFiltered = filterByRange(gaRows, hours);
+  const ycFiltered = filterByRange(ycRows, hours);
+
+  renderStatusBar(gaRows, ycRows);
+  renderChart('chartGA', gaFiltered);
+  renderChart('chartYC', ycFiltered);
+  renderMatrix(gaFiltered, ycFiltered);
+}
+
+document.getElementById('reload').addEventListener('click', refresh);
+document.getElementById('range').addEventListener('change', refresh);
+
+let refreshTimer = null;
+function scheduleRefresh() {
+  if (refreshTimer) clearInterval(refreshTimer);
+  const sec = parseInt(document.getElementById('refresh').value, 10);
+  if (sec > 0) refreshTimer = setInterval(refresh, sec * 1000);
+}
+document.getElementById('refresh').addEventListener('change', scheduleRefresh);
+
+refresh();
+scheduleRefresh();
+</script>
+</body>
+</html>
