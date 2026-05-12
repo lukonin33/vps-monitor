@@ -9,13 +9,20 @@ also probes each candidate via TCP 22 + TCP 443 and commits to a separate
 file logs/probes-candidates.csv. Used for Phase 6.5 — testing new IPs before
 migrating DNS off the old one.
 
+GitHub PAT is read from Yandex Lockbox at runtime (cached in-memory across
+warm invocations). This prevents PAT loss on every CLI redeploy
+(YC env block is immutable per version).
+
 chat-id: infra-vps-stability-monitoring-01
 task-id: vps-stability-diagnostic-monitoring-2026-05-09
 
 Env vars:
-  GITHUB_TOKEN       — fine-grained PAT, scope: lukonin33/vps-monitor → Contents R/W (required)
+  LOCKBOX_SECRET_ID  — ID of Lockbox secret containing key 'github_token' (required)
   GITHUB_REPO        — lukonin33/vps-monitor (default)
   VPS_CANDIDATE_IPS  — comma-separated extra IPs to probe (e.g. "5.129.X.Y,31.130.X.Y"). Empty = skip.
+
+IAM permissions required for service account:
+  lockbox.payloadViewer — on the specific Lockbox secret (granted via add-access-binding)
 """
 import base64
 import datetime
@@ -37,10 +44,45 @@ TCP_PORTS = {"ssh22": 22, "tcp443": 443}
 HTTP_TIMEOUT = 5
 TCP_TIMEOUT = 3
 
-GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
+LOCKBOX_SECRET_ID = os.environ.get("LOCKBOX_SECRET_ID")
 GITHUB_REPO = os.environ.get("GITHUB_REPO", "lukonin33/vps-monitor")
 CSV_PATH_MAIN = "logs/probes-ru.csv"
 CSV_PATH_CANDIDATES = "logs/probes-candidates.csv"
+
+# Module-level cache — warm container retains across invocations (~5 min)
+_cached_github_token: str | None = None
+
+
+def get_iam_token() -> str:
+    """Fetch IAM token for current service account from YC metadata service.
+    YC injects this endpoint for any function/VM with SA attached."""
+    url = "http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token"
+    req = urllib.request.Request(url, headers={"Metadata-Flavor": "Google"})
+    with urllib.request.urlopen(req, timeout=5) as resp:
+        return json.loads(resp.read())["access_token"]
+
+
+def get_lockbox_secret(secret_id: str, key: str) -> str:
+    """Fetch a specific key from Lockbox secret payload."""
+    iam_token = get_iam_token()
+    url = f"https://payload.lockbox.api.cloud.yandex.net/lockbox/v1/secrets/{secret_id}/payload"
+    req = urllib.request.Request(url, headers={"Authorization": f"Bearer {iam_token}"})
+    with urllib.request.urlopen(req, timeout=10) as resp:
+        payload = json.loads(resp.read())
+    for entry in payload.get("entries", []):
+        if entry.get("key") == key:
+            return entry.get("textValue", "")
+    raise KeyError(f"Key '{key}' not found in Lockbox secret {secret_id}")
+
+
+def get_github_token() -> str:
+    """Return cached GitHub PAT or fetch from Lockbox on cold start."""
+    global _cached_github_token
+    if _cached_github_token is None:
+        if not LOCKBOX_SECRET_ID:
+            raise RuntimeError("LOCKBOX_SECRET_ID env var not set")
+        _cached_github_token = get_lockbox_secret(LOCKBOX_SECRET_ID, "github_token")
+    return _cached_github_token
 
 
 def parse_candidate_ips() -> list[str]:
@@ -159,8 +201,10 @@ def commit_csv_line(token: str, repo: str, path: str, line: str, commit_msg: str
 
 
 def handler(event, context):
-    if not GITHUB_TOKEN:
-        return {"statusCode": 500, "body": "GITHUB_TOKEN env var not set"}
+    try:
+        github_token = get_github_token()
+    except Exception as e:
+        return {"statusCode": 500, "body": f"token fetch failed: {type(e).__name__}: {e}"}
 
     ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     candidate_ips = parse_candidate_ips()
@@ -184,7 +228,7 @@ def handler(event, context):
     # --- Commit both (separate files, separate commits) ---
     bodies = []
     try:
-        commit_csv_line(GITHUB_TOKEN, GITHUB_REPO, CSV_PATH_MAIN, main_line, f"ru-probe {main_line}")
+        commit_csv_line(github_token, GITHUB_REPO, CSV_PATH_MAIN, main_line, f"ru-probe {main_line}")
         bodies.append(f"main: {main_line}")
     except urllib.error.HTTPError as e:
         return {"statusCode": e.code, "body": f"github main error: {e.code} {e.reason}"}
@@ -193,7 +237,7 @@ def handler(event, context):
 
     if candidate_line:
         try:
-            commit_csv_line(GITHUB_TOKEN, GITHUB_REPO, CSV_PATH_CANDIDATES, candidate_line, f"cand-probe {candidate_line}")
+            commit_csv_line(github_token, GITHUB_REPO, CSV_PATH_CANDIDATES, candidate_line, f"cand-probe {candidate_line}")
             bodies.append(f"candidates: {candidate_line}")
         except urllib.error.HTTPError as e:
             # Don't fail the whole invocation if candidate write fails
