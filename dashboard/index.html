@@ -120,16 +120,6 @@
 
 <section style="margin-top: 16px;">
   <div class="panel">
-    <h2>Triangulation matrix — H1 vs H2 hypothesis discriminator</h2>
-    <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
-      Last 30 timestamps. Both red = H1 (VPS down). Only RU red = H2 (RU-route blocked). Only US red = H2-inverse (rare).
-    </p>
-    <div class="matrix" id="matrix"></div>
-  </div>
-</section>
-
-<section style="margin-top: 16px;">
-  <div class="panel">
     <h2>Candidate IPs comparison — Phase 6.5 migration test</h2>
     <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
       RU vantage (Yandex Cloud) probes TCP 22 + TCP 443 на 4 IP каждые 5 мин. Текущий primary 5.129.207.254 даёт baseline; кандидаты сравниваются по uptime % для решения о winner.
@@ -140,6 +130,16 @@
       <span class="ok">tcp22 OK — alive</span>
       <span class="fail">FAIL / TIMEOUT — unreachable</span>
     </div>
+  </div>
+</section>
+
+<section style="margin-top: 16px;">
+  <div class="panel">
+    <h2>Triangulation matrix — H1 vs H2 hypothesis discriminator</h2>
+    <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
+      Last 30 timestamps. Both red = H1 (VPS down). Only RU red = H2 (RU-route blocked). Only US red = H2-inverse (rare).
+    </p>
+    <div class="matrix" id="matrix"></div>
   </div>
 </section>
 
