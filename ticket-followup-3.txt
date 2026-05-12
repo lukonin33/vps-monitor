@@ -10,7 +10,9 @@
 Диагностика со стороны VPS (выполнено 2026-05-12 в 13:08 UTC = 20:08 НСК, после команды reboot):
 
 
-1) Self-ping fail. VPS пингует собственные привязанные IP:
+1) Self-ping fail для новых IP, но контрольные точки работают.
+
+VPS пингует собственные новые привязанные IP (не доходит):
 
   $ ping -c 2 186.246.14.127
   2 packets transmitted, 0 received, 100% packet loss
@@ -18,12 +20,21 @@
   $ ping -c 2 186.246.14.113
   2 packets transmitted, 0 received, 100% packet loss
 
-Контрольный тест на другую вашу VM в SPB-3 (тот же аккаунт, работает):
+Контрольный тест A — primary IP той же самой VM NeuroTest 1 (работает):
+
+  $ ping -c 2 5.129.207.254
+  2 packets transmitted, 2 received, 0% packet loss, RTT < 1 ms
+
+То есть сама VM полностью здорова — primary IP на том же интерфейсе eth0 пингуется, sshd слушает, HTTPS-сайты zavod.smm-ministr.ru / survey.smm-ministr.ru / brand.smm-ministr.ru работают штатно (могу подтвердить логами nginx).
+
+Контрольный тест B — другая моя VM в SPB-3 от того же аккаунта (работает):
 
   $ ping -c 2 92.53.115.87
   2 packets transmitted, 2 received, 0% packet loss, RTT 51.4 ms
 
-То есть базовая сетевая связность сервера в порядке (SPB-3 VPS пингуется через ваш backbone), но именно привязанные NSK IP не достигают даже самого NeuroTest 1.
+То есть и общая сетевая связность через ваш backbone (NSK → SPB) исправна, и provisioning floating-IP для других VM работает (этот SPB-3 IP привязан корректно при создании сервера).
+
+Вывод по этому пункту: проблема локализована строго на двух конкретных secondary IP (186.246.14.127, 186.246.14.113), привязанных к существующей VM NeuroTest 1. Не на VM, не на DC NSK-1, не на аккаунте.
 
 
 2) cloud-init metadata не содержит информации о secondary IP:
@@ -61,7 +72,12 @@ Secondary IP aliases для NSK IP отсутствуют.
 
 Вывод: привязка отражена в вашем UI ("Подключен к сервису = NeuroTest 1"), но networking provisioning на backend не завершён — IP не маршрутизируются к моей VM, и cloud-init не получил информацию о них при boot.
 
-Это похоже на сбой в процессе attach floating IP — UI пометил операцию как успешную, но фактическое L3 routing и metadata propagation не выполнились.
+Сужение поиска по контрольным точкам:
+  - primary IP той же VM (5.129.207.254) → OK
+  - другая моя VM в SPB-3 (92.53.115.87) → OK
+  - только что привязанные secondary IP (186.246.14.127, 186.246.14.113) → FAIL
+
+Это похоже на сбой в процессе attach floating IP для secondary-биндинга на существующую VM — UI пометил операцию как успешную, но фактическое L3 routing и metadata propagation не выполнились именно для этих двух адресов.
 
 
 Прошу:
