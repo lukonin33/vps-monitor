@@ -128,6 +128,21 @@
   </div>
 </section>
 
+<section style="margin-top: 16px;">
+  <div class="panel">
+    <h2>Candidate IPs comparison — Phase 6.5 migration test</h2>
+    <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
+      RU vantage (Yandex Cloud) probes TCP 22 + TCP 443 на 4 IP каждые 5 мин. Текущий primary 5.129.207.254 даёт baseline; кандидаты сравниваются по uptime % для решения о winner.
+    </p>
+    <div class="status-bar" id="candidatesStatus"></div>
+    <div class="chart-box" style="margin-top: 12px;"><canvas id="chartCandidates"></canvas></div>
+    <div class="legend">
+      <span class="ok">tcp22 OK — alive</span>
+      <span class="fail">FAIL / TIMEOUT — unreachable</span>
+    </div>
+  </div>
+</section>
+
 <footer>
   Source: <a href="https://github.com/lukonin33/vps-monitor" target="_blank" rel="noopener">github.com/lukonin33/vps-monitor</a> |
   chat-id: <code>infra-vps-stability-monitoring-01</code> |
@@ -139,8 +154,9 @@
 // CONFIG
 // ============================================================
 const SOURCES = {
-  ga: { url: '../logs/probes.csv',    label: 'US/EU (GitHub Actions)' },
-  yc: { url: '../logs/probes-ru.csv', label: 'RU (Yandex Cloud)' },
+  ga:         { url: '../logs/probes.csv',            label: 'US/EU (GitHub Actions)' },
+  yc:         { url: '../logs/probes-ru.csv',         label: 'RU (Yandex Cloud)' },
+  candidates: { url: '../logs/probes-candidates.csv', label: 'Candidate IPs (RU vantage)' },
 };
 const ENDPOINT_KEYS = ['zavod', 'survey', 'brand', 'smm', 'ssh22', 'tcp443'];
 const COLORS = {
@@ -151,6 +167,16 @@ const COLORS = {
   ssh22:  '#fbbf24',
   tcp443: '#fb7185',
 };
+
+// Candidate IPs for Phase 6.5 migration test. Order = display order.
+// Primary 5.129.207.254 data comes from probes-ru.csv (ssh22 column);
+// the rest come from probes-candidates.csv (<ip>_22 column).
+const CANDIDATES = [
+  { ip: '5.129.207.254',  label: '5.129.207.254 (current primary, NSK)',  zone: 'NSK-1', source: 'main',  color: '#94a3b8' },
+  { ip: '92.53.115.87',   label: '92.53.115.87 (SPB-3 test, AS9123)',     zone: 'SPB-3', source: 'cand',  color: '#22c55e' },
+  { ip: '186.246.14.127', label: '186.246.14.127 (NSK new, AS57494)',     zone: 'NSK-1', source: 'cand',  color: '#a78bfa' },
+  { ip: '186.246.14.113', label: '186.246.14.113 (NSK new, AS57494)',     zone: 'NSK-1', source: 'cand',  color: '#f472b6' },
+];
 
 // ============================================================
 // CSV PARSING — strict types, no interpolation into HTML
@@ -180,6 +206,36 @@ function parseCsvLine(line) {
 
 function parseCsv(text) {
   return text.split('\n').map(parseCsvLine).filter(Boolean);
+}
+
+// probes-candidates.csv has slightly different shape:
+// 2026-05-12T13:01:30Z,ips=92.53.115.87|186.246.14.127|186.246.14.113,92.53.115.87_22=OK,92.53.115.87_443=FAIL,...
+// Returns { ts, perIp: { '92.53.115.87': { tcp22, tcp443 }, ... } }
+function parseCandidateLine(line) {
+  const parts = line.trim().split(',');
+  if (parts.length < 2) return null;
+  const ts = new Date(parts[0]);
+  if (isNaN(ts)) return null;
+  const perIp = {};
+  for (const p of parts.slice(1)) {
+    if (p.startsWith('ips=')) continue;
+    const eq = p.indexOf('=');
+    if (eq === -1) continue;
+    const key = p.substring(0, eq).trim();
+    const val = p.substring(eq + 1).trim();
+    // key format: <ip>_<port>, ip can have dots
+    const m = key.match(/^(.+)_(\d+)$/);
+    if (!m) continue;
+    const ip = m[1];
+    const port = m[2];
+    if (!perIp[ip]) perIp[ip] = {};
+    perIp[ip][`tcp${port}`] = val;
+  }
+  return { ts, perIp };
+}
+
+function parseCandidatesCsv(text) {
+  return text.split('\n').map(parseCandidateLine).filter(Boolean);
 }
 
 // ============================================================
@@ -322,6 +378,116 @@ function renderStatusBar(gaRows, ycRows) {
   bar.appendChild(makeTriangulationCard(lastGa, lastYc));
 }
 
+// Build unified per-IP timeseries: { '<ip>': [{ts, tcp22, tcp443}], ... }
+// Merges main YC probe data (for primary 5.129.207.254) with candidate probe data.
+function buildCandidateSeries(ycRows, candRows) {
+  const series = {};
+  for (const c of CANDIDATES) series[c.ip] = [];
+
+  // Primary IP: pull ssh22/tcp443 from main YC probes
+  const primary = CANDIDATES.find(c => c.source === 'main');
+  if (primary) {
+    for (const r of ycRows) {
+      series[primary.ip].push({
+        ts: r.ts,
+        tcp22: r.values.ssh22 || 'NA',
+        tcp443: r.values.tcp443 || 'NA',
+      });
+    }
+  }
+
+  // Candidate IPs: pull <ip>_22 and <ip>_443 from candidate probes
+  for (const r of candRows) {
+    for (const c of CANDIDATES) {
+      if (c.source !== 'cand') continue;
+      const data = r.perIp[c.ip];
+      if (!data) continue;
+      series[c.ip].push({
+        ts: r.ts,
+        tcp22: data.tcp22 || 'NA',
+        tcp443: data.tcp443 || 'NA',
+      });
+    }
+  }
+
+  return series;
+}
+
+function computeUptimePct(rows) {
+  if (rows.length === 0) return null;
+  const okCount = rows.filter(r => classify(r.tcp22) === 'ok').length;
+  return Math.round((okCount / rows.length) * 100);
+}
+
+function renderCandidatesStatus(series) {
+  const bar = document.getElementById('candidatesStatus');
+  clear(bar);
+  for (const c of CANDIDATES) {
+    const rows = series[c.ip] || [];
+    const latest = rows[rows.length - 1];
+    const uptimePct = computeUptimePct(rows);
+    const latestClass = latest ? classify(latest.tcp22) : 'na';
+    const cardClass = latestClass === 'ok' ? 'ok' : latestClass === 'fail' ? 'fail' : 'warn';
+    const ago = latest ? Math.round((Date.now() - latest.ts.getTime()) / 60000) : null;
+
+    const card = el('div', { cls: `status-card ${cardClass}` }, [
+      el('div', { cls: 'label', text: c.zone }),
+      el('div', { cls: 'value', text: c.ip }),
+      el('div', { cls: 'meta', text: uptimePct === null ? 'no data' : `uptime ${uptimePct}% (${rows.length} probes)` }),
+      el('div', { cls: 'meta', text: latest
+        ? `latest tcp22=${latest.tcp22} tcp443=${latest.tcp443} (${ago}m ago)`
+        : 'no probes yet' }),
+    ]);
+    bar.appendChild(card);
+  }
+}
+
+function renderCandidatesChart(series, hours) {
+  const ctx = document.getElementById('chartCandidates').getContext('2d');
+  if (charts.chartCandidates) charts.chartCandidates.destroy();
+
+  const datasets = CANDIDATES.map(c => {
+    const rows = filterByRange(series[c.ip] || [], hours);
+    return {
+      label: c.ip,
+      data: rows.map(r => ({ x: r.ts, y: yPos(r.tcp22) })).filter(p => p.y !== null),
+      borderColor: c.color,
+      backgroundColor: c.color,
+      borderWidth: 1.5,
+      pointRadius: 2,
+      pointHoverRadius: 5,
+      tension: 0,
+      stepped: true,
+    };
+  });
+
+  charts.chartCandidates = new Chart(ctx, {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', labels: { color: '#94a3b8', font: { size: 11 }, boxWidth: 12 } },
+      },
+      scales: {
+        x: { type: 'time', time: { tooltipFormat: 'yyyy-MM-dd HH:mm' }, ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { color: '#334155' } },
+        y: {
+          min: -0.3, max: 2.3,
+          ticks: {
+            color: '#94a3b8', font: { size: 10 },
+            callback: v => ({ 0: 'FAIL', 1: '4xx', 2: 'OK' }[v] || ''),
+            stepSize: 1,
+          },
+          grid: { color: '#334155' },
+        },
+      },
+    },
+  });
+}
+
 function renderMatrix(gaRows, ycRows) {
   const allTs = [...new Set([...gaRows, ...ycRows].map(r => r.ts.getTime()))].sort((a, b) => b - a).slice(0, 30);
   const gaByTs = new Map(gaRows.map(r => [r.ts.getTime(), r.values]));
@@ -378,11 +544,13 @@ async function refresh() {
   clear(document.getElementById('errors'));
   const hours = parseInt(document.getElementById('range').value, 10);
 
-  let gaRows = [], ycRows = [];
+  let gaRows = [], ycRows = [], candRows = [];
   try { gaRows = parseCsv(await fetchCsv(SOURCES.ga.url)); }
   catch (e) { showError(`GA load failed: ${e.message}`); }
   try { ycRows = parseCsv(await fetchCsv(SOURCES.yc.url)); }
   catch (e) { showError(`YC load failed: ${e.message}`); }
+  try { candRows = parseCandidatesCsv(await fetchCsv(SOURCES.candidates.url)); }
+  catch (e) { showError(`Candidates load failed: ${e.message}`); }
 
   const gaFiltered = filterByRange(gaRows, hours);
   const ycFiltered = filterByRange(ycRows, hours);
@@ -391,6 +559,11 @@ async function refresh() {
   renderChart('chartGA', gaFiltered);
   renderChart('chartYC', ycFiltered);
   renderMatrix(gaFiltered, ycFiltered);
+
+  // Candidates: build unified series from ycRows (primary IP) + candRows (others)
+  const candSeries = buildCandidateSeries(ycRows, candRows);
+  renderCandidatesStatus(candSeries);
+  renderCandidatesChart(candSeries, hours);
 }
 
 document.getElementById('reload').addEventListener('click', refresh);
