@@ -1,80 +1,80 @@
 Здравствуйте.
 
-Заказал 2 новых IPv4 в зоне NSK-1 и привязал их к серверу NeuroTest 1 (5.129.207.254) через ваш UI. В колонке «Подключен к сервису» оба IP показывают «NeuroTest 1»:
+Заказал 2 новых IPv4 в зоне NSK-1 и привязал их к серверу NeuroTest 1 (5.129.207.254) через ваш UI. В колонке "Подключен к сервису" оба IP показывают "NeuroTest 1":
 
-- 186.246.14.127 → NeuroTest 1
-- 186.246.14.113 → NeuroTest 1
+  186.246.14.127 → NeuroTest 1
+  186.246.14.113 → NeuroTest 1
 
-Однако фактически **routing к этим IP не работает** — после привязки (включая полную перезагрузку сервера) IP-адреса не маршрутизируются к VM на уровне вашей сети.
+Однако фактически routing к этим IP не работает. После привязки (включая полную перезагрузку сервера) IP-адреса не маршрутизируются к VM на уровне вашей сети.
 
-Диагностика со стороны VPS (выполнено 2026-05-12 в 13:08 UTC = 20:08 НСК после `reboot`):
+Диагностика со стороны VPS (выполнено 2026-05-12 в 13:08 UTC = 20:08 НСК, после команды reboot):
 
-**1. Self-ping fail (VPS пингует _собственные_ привязанные IP):**
 
-```
-$ ping -c 2 186.246.14.127
-2 packets transmitted, 0 received, 100% packet loss
+1) Self-ping fail. VPS пингует собственные привязанные IP:
 
-$ ping -c 2 186.246.14.113
-2 packets transmitted, 0 received, 100% packet loss
+  $ ping -c 2 186.246.14.127
+  2 packets transmitted, 0 received, 100% packet loss
 
-# Контрольный тест на другую вашу VM в SPB-3 (тот же account, работает):
-$ ping -c 2 92.53.115.87
-2 packets transmitted, 2 received, 0% packet loss, RTT 51.4ms
-```
+  $ ping -c 2 186.246.14.113
+  2 packets transmitted, 0 received, 100% packet loss
 
-То есть базовая сетевая связность сервера в порядке (SPB-3 VPS пингуется через ваш backbone), но именно привязанные NSK IP **не достигают** даже самого NeuroTest 1.
+Контрольный тест на другую вашу VM в SPB-3 (тот же аккаунт, работает):
 
-**2. cloud-init metadata не содержит информации о secondary IPs:**
+  $ ping -c 2 92.53.115.87
+  2 packets transmitted, 2 received, 0% packet loss, RTT 51.4 ms
 
-```
-$ cloud-init query ds.meta_data.network
-ERROR: instance-data 'ds.meta_data' has no 'network'
-```
+То есть базовая сетевая связность сервера в порядке (SPB-3 VPS пингуется через ваш backbone), но именно привязанные NSK IP не достигают даже самого NeuroTest 1.
 
-Ваш metadata service не передал VM информацию о привязанных IPs при boot.
 
-**3. netplan конфигурация не обновлена:**
+2) cloud-init metadata не содержит информации о secondary IP:
 
-```
-/etc/netplan/
-  50-cloud-init.yaml   (только primary IP через DHCP)
-  51-dhcp6.yaml
-```
+  $ cloud-init query ds.meta_data.network
+  ERROR: instance-data 'ds.meta_data' has no 'network'
+
+Ваш metadata service не передал VM информацию о привязанных IP при boot.
+
+
+3) netplan конфигурация не обновлена:
+
+  /etc/netplan/
+    50-cloud-init.yaml   (только primary IP через DHCP)
+    51-dhcp6.yaml
 
 Файлы не содержат записей о 186.246.14.127 или 186.246.14.113.
 
-**4. routing table (ip route show) — только primary IP:**
 
-```
-default via 5.129.207.1 dev eth0 ... src 5.129.207.254
-5.129.207.0/24 dev eth0 ... src 5.129.207.254
-```
+4) routing table (ip route show) — только primary IP:
+
+  default via 5.129.207.1 dev eth0 ... src 5.129.207.254
+  5.129.207.0/24 dev eth0 ... src 5.129.207.254
 
 Никаких маршрутов для подсети 186.246.14.0/24.
 
-**5. На самом интерфейсе eth0 — только primary:**
 
-```
-$ ip -4 addr show eth0
-inet 5.129.207.254/24 ... scope global dynamic eth0
-```
+5) На самом интерфейсе eth0 — только primary:
 
-Secondary IP aliases для NSK IPs отсутствуют.
+  $ ip -4 addr show eth0
+  inet 5.129.207.254/24 ... scope global dynamic eth0
 
----
+Secondary IP aliases для NSK IP отсутствуют.
 
-**Вывод:** привязка отражена в вашем UI («Подключен к сервису = NeuroTest 1»), но networking provisioning на backend не завершён — IPs **не маршрутизируются** к моей VM, и cloud-init не получил информацию о них при boot.
 
-Это похоже на bug в вашем процессе attach floating IP — UI пометил операцию как успешную, но фактическое L3 routing и metadata propagation не выполнились.
+Вывод: привязка отражена в вашем UI ("Подключен к сервису = NeuroTest 1"), но networking provisioning на backend не завершён — IP не маршрутизируются к моей VM, и cloud-init не получил информацию о них при boot.
 
-**Прошу:**
+Это похоже на сбой в процессе attach floating IP — UI пометил операцию как успешную, но фактическое L3 routing и metadata propagation не выполнились.
 
-1. **Проверить состояние** binding'ов для IPs 186.246.14.127 и 186.246.14.113 в вашей внутренней системе — что показывает networking layer (не UI, а реальный provisioning state)?
-2. **Принудительно re-provision** routing для этих IPs (force re-bind на backend без необходимости отвязывать-привязывать через UI с моей стороны).
-3. Если описанная проблема системная — посмотрите есть ли pending tasks / failed jobs в очереди provisioning для моего аккаунта.
-4. После исправления — отпишите, я проверю self-ping и probe-тест с внешней точки наблюдения; если работает — продолжим план миграции IP.
 
-Готов предоставить дополнительные диагностические данные (вывод `ip addr`, `ip route`, `journalctl -u systemd-networkd`, cloud-init logs) — пришлите запрос если нужно.
+Прошу:
 
-Ожидаемое поведение: после backend fix должно быть `ip addr show eth0` показывает 3 IP (primary 5.129.207.254 + secondaries 186.246.14.127 и 186.246.14.113), self-ping всех трёх IP проходит, маршруты в `ip route show` для секондариев присутствуют.
+1. Проверить состояние binding-ов для IP 186.246.14.127 и 186.246.14.113 в вашей внутренней системе. Что показывает networking layer (не UI, а реальный provisioning state)?
+
+2. Принудительно re-provision routing для этих IP (force re-bind на backend без необходимости отвязывать-привязывать через UI с моей стороны).
+
+3. Если описанная проблема системная — посмотрите есть ли pending tasks или failed jobs в очереди provisioning для моего аккаунта.
+
+4. После исправления — отпишите. Я проверю self-ping и probe-тест с внешней точки наблюдения. Если работает — продолжим план миграции IP.
+
+
+Готов предоставить дополнительные диагностические данные (полный вывод ip addr, ip route, journalctl -u systemd-networkd, cloud-init logs) — пришлите запрос если нужно.
+
+Ожидаемое поведение: после backend fix должно быть, что ip addr show eth0 показывает 3 IP (primary 5.129.207.254 + secondary 186.246.14.127 и 186.246.14.113), self-ping всех трёх IP проходит, маршруты для секондариев присутствуют в ip route show.
