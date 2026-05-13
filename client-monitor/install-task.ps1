@@ -24,11 +24,18 @@ $settings = New-ScheduledTaskSettingsSet `
     -DontStopIfGoingOnBatteries `
     -AllowStartIfOnBatteries
 
+# User-level task (no admin elevation needed)
+$principal = New-ScheduledTaskPrincipal `
+    -UserId "$env:USERDOMAIN\$env:USERNAME" `
+    -LogonType Interactive `
+    -RunLevel Limited
+
 Register-ScheduledTask `
     -TaskName $TaskName `
     -Action $action `
     -Trigger $trigger `
     -Settings $settings `
+    -Principal $principal `
     -Description 'Probes 4 plyeyada production URLs every 1 minute. Writes to client-probe-log.csv. For diagnostic triangulation.'
 
 Write-Host ''
