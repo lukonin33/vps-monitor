@@ -1111,3 +1111,4 @@
 2026-05-13T08:26:16Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-13T08:31:22Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-13T08:36:23Z,zavod=TIMEOUT,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-13T08:41:16Z,zavod=TIMEOUT,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
