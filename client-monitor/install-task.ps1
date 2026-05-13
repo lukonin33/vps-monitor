@@ -46,8 +46,6 @@ Write-Host 'Frequency: every 1 minute'
 Write-Host 'Log file: D:\Projects\vps-monitor\client-monitor\client-probe-log.csv'
 Write-Host ''
 Write-Host 'First run will happen at next minute boundary.'
-Write-Host "Verify:        Get-ScheduledTask -TaskName '$TaskName'"
-Write-Host "Run manually:  Start-ScheduledTask -TaskName '$TaskName'"
-Write-Host ''
-Write-Host 'To stop later (use single quotes around $false):'
-Write-Host "  Unregister-ScheduledTask -TaskName '$TaskName' -Confirm:" + '$false'
+Write-Host 'Verify task:  Get-ScheduledTask -TaskName vps-monitor-client-probe'
+Write-Host 'Run manually: Start-ScheduledTask -TaskName vps-monitor-client-probe'
+Write-Host 'Stop:         see README.md for stop command'
