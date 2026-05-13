@@ -1013,3 +1013,4 @@
 2026-05-13T00:15:52Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-13T00:21:11Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-13T00:25:54Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-13T00:30:57Z,zavod=TIMEOUT,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
