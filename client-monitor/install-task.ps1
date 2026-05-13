@@ -38,15 +38,16 @@ Register-ScheduledTask `
     -Settings $settings `
     -Description 'Probes 4 plyeyada production URLs каждую 1 минуту, пишет в client-probe-log.csv. Для диагностики client-side vs server-side outages.'
 
-Write-Host ""
-Write-Host "=== Task installed ==="
+Write-Host ''
+Write-Host '=== Task installed ==='
 Write-Host "Task name: $TaskName"
 Write-Host "Script: $ScriptPath"
-Write-Host "Frequency: every 1 minute"
-Write-Host "Log file: D:\Projects\vps-monitor\client-monitor\client-probe-log.csv"
-Write-Host ""
-Write-Host "First run will happen at next minute boundary."
-Write-Host "Verify через:  Get-ScheduledTask -TaskName '$TaskName'"
+Write-Host 'Frequency: every 1 minute'
+Write-Host 'Log file: D:\Projects\vps-monitor\client-monitor\client-probe-log.csv'
+Write-Host ''
+Write-Host 'First run will happen at next minute boundary.'
+Write-Host "Verify:        Get-ScheduledTask -TaskName '$TaskName'"
 Write-Host "Run manually:  Start-ScheduledTask -TaskName '$TaskName'"
-Write-Host ""
-Write-Host "To stop later: Unregister-ScheduledTask -TaskName '$TaskName' -Confirm:`$false"
+Write-Host ''
+Write-Host 'To stop later (use single quotes around $false):'
+Write-Host "  Unregister-ScheduledTask -TaskName '$TaskName' -Confirm:" + '$false'
