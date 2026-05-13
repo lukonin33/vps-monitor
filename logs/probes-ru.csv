@@ -1234,3 +1234,4 @@
 2026-05-13T18:41:05Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-13T18:45:50Z,zavod=TIMEOUT,survey=TIMEOUT,brand=TIMEOUT,smm=TIMEOUT,ssh22=FAIL,tcp443=FAIL
 2026-05-13T18:51:04Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-13T18:55:48Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
