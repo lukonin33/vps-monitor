@@ -1357,3 +1357,4 @@
 2026-05-14T04:55:44Z,zavod=TIMEOUT,survey=TIMEOUT,brand=TIMEOUT,smm=TIMEOUT,ssh22=FAIL,tcp443=FAIL
 2026-05-14T05:01:25Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-14T05:06:16Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-14T05:10:53Z,zavod=401,survey=405,brand=405,smm=200,ssh22=OK,tcp443=OK
