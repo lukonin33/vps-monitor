@@ -1962,3 +1962,4 @@
 2026-05-16T07:21:11Z,zavod=TIMEOUT,survey=TIMEOUT,brand=TIMEOUT,smm=TIMEOUT,ssh22=FAIL,tcp443=FAIL
 2026-05-16T07:26:15Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-16T07:31:17Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-16T07:36:17Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
