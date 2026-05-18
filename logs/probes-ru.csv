@@ -2602,3 +2602,4 @@
 2026-05-18T12:41:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-18T12:46:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-18T12:51:25Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-18T12:56:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
