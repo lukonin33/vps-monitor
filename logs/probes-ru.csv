@@ -2837,3 +2837,4 @@
 2026-05-19T08:16:44Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-05-19T08:21:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-05-19T08:26:47Z,zavod=TIMEOUT,survey=200,brand=405,smm=TIMEOUT,ssh22=FAIL,tcp443=FAIL
+2026-05-19T08:31:25Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
