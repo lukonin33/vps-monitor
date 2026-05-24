@@ -4239,3 +4239,4 @@
 2026-05-24T05:36:39Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-24T05:41:45Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-24T05:46:02Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-24T05:51:08Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
