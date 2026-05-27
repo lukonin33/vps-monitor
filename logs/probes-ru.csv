@@ -5050,3 +5050,4 @@
 2026-05-27T01:11:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-27T01:16:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-27T01:21:01Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-05-27T01:26:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
