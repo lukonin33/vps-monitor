@@ -5540,3 +5540,4 @@
 2026-05-28T18:41:23Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-28T18:46:32Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-05-28T18:51:29Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-28T18:56:29Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
