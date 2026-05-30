@@ -6080,3 +6080,4 @@
 2026-05-30T15:41:10Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-30T15:46:17Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-30T15:51:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-30T15:56:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
