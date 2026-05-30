@@ -6170,3 +6170,4 @@
 2026-05-30T23:11:24Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-30T23:16:28Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-30T23:21:28Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-30T23:26:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
