@@ -6393,3 +6393,4 @@
 2026-05-31T17:46:29Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-31T17:51:24Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-31T17:56:30Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-05-31T18:01:58Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
