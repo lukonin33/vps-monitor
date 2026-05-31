@@ -6198,3 +6198,4 @@
 2026-05-31T01:31:05Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-31T01:35:54Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-31T01:41:02Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-31T01:46:03Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
