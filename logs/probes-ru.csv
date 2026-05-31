@@ -6211,3 +6211,4 @@
 2026-05-31T02:36:14Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-31T02:41:16Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-05-31T02:46:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-05-31T02:51:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
