@@ -6482,3 +6482,4 @@
 2026-06-01T01:11:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-01T01:16:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-01T01:21:43Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-01T01:26:05Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
