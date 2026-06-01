@@ -6508,3 +6508,4 @@
 2026-06-01T03:21:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-01T03:26:44Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-01T03:31:12Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-01T03:36:28Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
