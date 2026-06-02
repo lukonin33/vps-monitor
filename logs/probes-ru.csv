@@ -6833,3 +6833,4 @@
 2026-06-02T06:26:20Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T06:31:39Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T06:36:10Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-02T06:41:25Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
