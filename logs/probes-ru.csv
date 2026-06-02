@@ -6928,3 +6928,4 @@
 2026-06-02T14:21:12Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-02T14:26:22Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-02T14:31:44Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-02T14:36:21Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
