@@ -275,3 +275,4 @@
 2026-06-02T02:04:54Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T06:55:26Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T11:23:54Z,zavod=401,survey=200,brand=200,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-02T15:42:49Z,zavod=401,survey=200,brand=200,smm=200,ssh22=FAIL,tcp443=FAIL
