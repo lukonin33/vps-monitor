@@ -7021,3 +7021,4 @@
 2026-06-02T22:06:17Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T22:11:12Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T22:16:07Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-02T22:20:57Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
