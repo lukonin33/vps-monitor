@@ -6854,3 +6854,4 @@
 2026-06-02T08:11:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T08:16:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-02T08:21:29Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-02T08:26:40Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
