@@ -7215,3 +7215,4 @@
 2026-06-03T14:16:04Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-03T14:21:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-03T14:25:51Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-03T14:31:17Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
