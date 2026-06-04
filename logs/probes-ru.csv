@@ -7493,3 +7493,4 @@
 2026-06-04T13:26:07Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-04T13:31:02Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-04T13:35:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-04T13:40:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
