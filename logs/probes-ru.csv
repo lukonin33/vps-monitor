@@ -7801,3 +7801,4 @@
 2026-06-05T15:10:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-05T15:16:03Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-05T15:20:59Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-05T15:26:09Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
