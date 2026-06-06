@@ -8014,3 +8014,4 @@
 2026-06-06T08:56:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T09:01:18Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T09:05:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-06T09:10:57Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
