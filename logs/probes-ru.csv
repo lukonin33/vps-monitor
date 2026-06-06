@@ -8067,3 +8067,4 @@
 2026-06-06T13:21:10Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T13:26:09Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T13:31:17Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-06T13:35:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
