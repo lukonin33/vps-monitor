@@ -8048,3 +8048,4 @@
 2026-06-06T11:46:09Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T11:51:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T11:56:08Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-06T12:01:21Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
