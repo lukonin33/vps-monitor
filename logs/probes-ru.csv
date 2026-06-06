@@ -8076,3 +8076,4 @@
 2026-06-06T14:05:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T14:11:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-06T14:15:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-06T14:20:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
