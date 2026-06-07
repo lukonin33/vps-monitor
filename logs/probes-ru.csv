@@ -8265,3 +8265,4 @@
 2026-06-07T05:51:09Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-07T05:56:04Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-07T06:01:22Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-07T06:06:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
