@@ -8245,3 +8245,4 @@
 2026-06-07T04:11:04Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-07T04:15:48Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-07T04:20:42Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-07T04:26:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
