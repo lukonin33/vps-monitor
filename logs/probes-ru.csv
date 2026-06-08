@@ -8640,3 +8640,4 @@
 2026-06-08T13:06:11Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-08T13:11:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-08T13:15:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-08T13:21:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
