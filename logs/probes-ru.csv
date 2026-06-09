@@ -8968,3 +8968,4 @@
 2026-06-09T16:26:05Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-09T16:30:53Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-09T16:36:12Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-09T16:41:11Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
