@@ -8893,3 +8893,4 @@
 2026-06-09T10:11:22Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-09T10:16:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-09T10:21:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-09T10:26:16Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
