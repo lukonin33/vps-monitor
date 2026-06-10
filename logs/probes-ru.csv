@@ -9264,3 +9264,4 @@
 2026-06-10T17:21:11Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-10T17:25:58Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-10T17:31:20Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-10T17:36:11Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
