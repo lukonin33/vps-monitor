@@ -9529,3 +9529,4 @@
 2026-06-11T15:26:06Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-11T15:31:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-11T15:36:12Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-06-11T15:41:06Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
