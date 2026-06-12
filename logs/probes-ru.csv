@@ -9904,3 +9904,4 @@
 2026-06-12T22:40:59Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-12T22:45:55Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-12T22:50:49Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-12T22:56:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
