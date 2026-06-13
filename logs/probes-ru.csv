@@ -10098,3 +10098,4 @@
 2026-06-13T14:50:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-13T14:56:04Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T15:01:13Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-13T15:05:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
