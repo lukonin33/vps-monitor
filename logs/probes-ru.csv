@@ -9925,3 +9925,4 @@
 2026-06-13T00:25:52Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T00:30:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T00:36:01Z,zavod=TIMEOUT,survey=200,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
+2026-06-13T00:40:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
