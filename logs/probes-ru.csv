@@ -10108,3 +10108,4 @@
 2026-06-13T15:40:53Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T15:46:04Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T15:50:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-13T15:56:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
