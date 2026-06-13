@@ -10129,3 +10129,4 @@
 2026-06-13T17:26:02Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T17:31:08Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T17:36:10Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-13T17:41:08Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
