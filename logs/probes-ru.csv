@@ -10265,3 +10265,4 @@
 2026-06-14T04:45:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-14T04:51:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-14T04:56:13Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-14T05:01:08Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
