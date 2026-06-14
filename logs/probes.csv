@@ -380,3 +380,4 @@
 2026-06-13T20:24:16Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T21:46:59Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-06-13T22:50:43Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
+2026-06-14T00:02:12Z,zavod=401,survey=200,brand=200,smm=200,ssh22=FAIL,tcp443=FAIL
