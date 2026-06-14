@@ -10485,3 +10485,4 @@
 2026-06-14T23:05:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-14T23:11:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-14T23:16:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-14T23:21:05Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
