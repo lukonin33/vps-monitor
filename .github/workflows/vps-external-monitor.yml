@@ -38,10 +38,10 @@ jobs:
           SURVEY=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://survey.smm-ministr.ru/ 2>/dev/null || echo "TIMEOUT")
           BRAND=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://brand.smm-ministr.ru/ 2>/dev/null || echo "TIMEOUT")
           SMM=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://krutly.com/ 2>/dev/null || echo "TIMEOUT")
-          # SSH port reachability (TCP-only, no auth) — primary 186.246.14.127 (свап 18.05; .254 retired в blacklist)
-          SSH=$(timeout 5 bash -c '</dev/tcp/186.246.14.127/22' 2>/dev/null && echo "OK" || echo "FAIL")
+          # SSH port reachability (TCP-only, no auth)
+          SSH=$(timeout 5 bash -c '</dev/tcp/5.129.207.254/22' 2>/dev/null && echo "OK" || echo "FAIL")
           # nginx HTTPS port
-          PORT443=$(timeout 5 bash -c '</dev/tcp/186.246.14.127/443' 2>/dev/null && echo "OK" || echo "FAIL")
+          PORT443=$(timeout 5 bash -c '</dev/tcp/5.129.207.254/443' 2>/dev/null && echo "OK" || echo "FAIL")
           LINE="$TS,zavod=$ZAVOD,survey=$SURVEY,brand=$BRAND,smm=$SMM,ssh22=$SSH,tcp443=$PORT443"
           echo "$LINE" >> logs/probes.csv
           echo "line=$LINE" >> "$GITHUB_OUTPUT"

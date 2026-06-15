@@ -33,7 +33,7 @@ import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
-VPS_IP = "186.246.14.127"  # current primary (свап 18.05; .254 retired в upstream blacklist, см. Server inventory)
+VPS_IP = "5.129.207.254"
 DOMAINS = {
     "zavod": "https://zavod.smm-ministr.ru/",
     "survey": "https://survey.smm-ministr.ru/",
