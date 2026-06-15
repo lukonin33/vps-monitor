@@ -10668,3 +10668,4 @@
 2026-06-15T14:21:11Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T14:25:59Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T14:30:59Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-15T14:35:57Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
