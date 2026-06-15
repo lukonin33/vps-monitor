@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VPS 186.246.14.127 — Stability Dashboard</title>
+<title>VPS 5.129.207.254 — Stability Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js" crossorigin="anonymous"></script>
 <style>
@@ -69,7 +69,7 @@
 <body>
 
 <header>
-  <h1>VPS 186.246.14.127 — Stability Dashboard</h1>
+  <h1>VPS 5.129.207.254 — Stability Dashboard</h1>
   <div class="controls">
     <label>Time range:</label>
     <select id="range">
@@ -122,7 +122,7 @@
   <div class="panel">
     <h2>Candidate IPs comparison — Phase 6.5 migration test</h2>
     <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
-      Phase 6.5 завершена (15.06): primary остался 186.246.14.127 (свап 18.05 подтверждён — .127=100%, .254=89.3% retired). Кандидат-сравнение заморожено; ниже — фоновый health-baseline текущего primary. ⚠️ Меряется ВХОДЯЩАЯ достижимость; egress-проблема (исходящая) здесь не видна.
+      RU vantage (Yandex Cloud) probes TCP 22 + TCP 443 на 4 IP каждые 5 мин. Текущий primary 5.129.207.254 даёт baseline; кандидаты сравниваются по uptime % для решения о winner.
     </p>
     <div class="status-bar" id="candidatesStatus"></div>
     <div class="chart-box" style="margin-top: 12px;"><canvas id="chartCandidates"></canvas></div>
@@ -168,12 +168,14 @@ const COLORS = {
   tcp443: '#fb7185',
 };
 
-// Primary 186.246.14.127 (current, свап 18.05) data comes from probes-ru.csv (ssh22 column).
-// Candidate IPs (Phase 6.5, FROZEN после 15.06 — VPS_CANDIDATE_IPS снят) come from probes-candidates.csv.
+// Candidate IPs for Phase 6.5 migration test. Order = display order.
+// Primary 5.129.207.254 data comes from probes-ru.csv (ssh22 column);
+// the rest come from probes-candidates.csv (<ip>_22 column).
 const CANDIDATES = [
-  { ip: '186.246.14.127', label: '186.246.14.127 (current primary, NSK)', zone: 'NSK-1', source: 'main',  color: '#a78bfa' },
-  { ip: '92.53.115.87',   label: '92.53.115.87 (SPB-3, frozen Phase 6.5)', zone: 'SPB-3', source: 'cand',  color: '#22c55e' },
-  { ip: '186.246.14.113', label: '186.246.14.113 (NSK alias, frozen)',    zone: 'NSK-1', source: 'cand',  color: '#f472b6' },
+  { ip: '5.129.207.254',  label: '5.129.207.254 (current primary, NSK)',  zone: 'NSK-1', source: 'main',  color: '#94a3b8' },
+  { ip: '92.53.115.87',   label: '92.53.115.87 (SPB-3 test, AS9123)',     zone: 'SPB-3', source: 'cand',  color: '#22c55e' },
+  { ip: '186.246.14.127', label: '186.246.14.127 (NSK new, AS57494)',     zone: 'NSK-1', source: 'cand',  color: '#a78bfa' },
+  { ip: '186.246.14.113', label: '186.246.14.113 (NSK new, AS57494)',     zone: 'NSK-1', source: 'cand',  color: '#f472b6' },
 ];
 
 // ============================================================
