@@ -10494,3 +10494,4 @@
 2026-06-14T23:51:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-14T23:56:03Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T00:01:21Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-15T00:06:03Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
