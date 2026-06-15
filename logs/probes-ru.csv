@@ -10673,3 +10673,4 @@
 2026-06-15T14:46:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T14:51:03Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T14:56:13Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-06-15T15:01:18Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
