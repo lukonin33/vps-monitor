@@ -10699,3 +10699,4 @@
 2026-06-15T16:55:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T17:01:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-06-15T17:06:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-15T17:12:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
