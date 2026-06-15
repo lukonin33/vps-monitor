@@ -1,4 +1,4 @@
-# vps-monitor — external probes для VPS 5.129.207.254
+# vps-monitor — external probes для VPS 186.246.14.127 (primary с 18.05; .254 retired в blacklist)
 
 **Два независимых vantage point** пингуют 4 домена плеяды + SSH/443 порты VPS каждые 5 минут:
 
