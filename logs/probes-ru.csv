@@ -10523,3 +10523,4 @@
 2026-06-15T02:16:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T02:20:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-15T02:26:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-15T02:31:13Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
