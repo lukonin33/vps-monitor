@@ -10860,3 +10860,4 @@
 2026-06-16T06:21:09Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-16T06:25:50Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-16T06:31:13Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-16T06:36:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
