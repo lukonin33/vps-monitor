@@ -11222,3 +11222,4 @@
 2026-06-17T12:31:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-17T12:35:51Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-17T12:41:12Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-17T12:46:04Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
