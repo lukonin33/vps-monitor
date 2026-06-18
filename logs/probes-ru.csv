@@ -11579,3 +11579,4 @@
 2026-06-18T18:21:04Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-18T18:26:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-18T18:31:07Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-18T18:36:10Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
