@@ -12213,3 +12213,4 @@
 2026-06-20T23:15:58Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-20T23:20:59Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-20T23:26:01Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-20T23:31:16Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
