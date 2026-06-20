@@ -12205,3 +12205,4 @@
 2026-06-20T22:35:58Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-20T22:41:05Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-20T22:45:45Z,zavod=TIMEOUT,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-20T22:50:57Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
