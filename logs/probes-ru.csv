@@ -12457,3 +12457,4 @@
 2026-06-21T19:35:50Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-06-21T19:41:13Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-21T19:45:46Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-21T19:50:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
