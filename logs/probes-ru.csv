@@ -12770,3 +12770,4 @@
 2026-06-22T21:40:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-22T21:45:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-22T21:50:41Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-22T21:55:44Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
