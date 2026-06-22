@@ -12615,3 +12615,4 @@
 2026-06-22T08:45:59Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-22T08:50:51Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-22T08:56:06Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-22T09:01:04Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
