@@ -12955,3 +12955,4 @@
 2026-06-23T13:15:31Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-23T13:20:47Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-23T13:25:39Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-23T13:30:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
