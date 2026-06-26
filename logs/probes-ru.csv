@@ -709,3 +709,4 @@
 2026-06-26T06:50:41Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-26T06:55:23Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-26T07:00:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-06-26T07:05:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
