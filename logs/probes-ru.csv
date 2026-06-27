@@ -928,3 +928,4 @@
 2026-06-27T01:05:25Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-27T01:10:29Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-27T01:15:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-27T01:20:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
