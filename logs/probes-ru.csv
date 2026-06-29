@@ -1615,3 +1615,4 @@
 2026-06-29T10:20:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-29T10:25:29Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-29T10:30:46Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-29T10:35:25Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
