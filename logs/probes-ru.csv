@@ -1963,3 +1963,4 @@
 2026-06-30T15:25:37Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-30T15:30:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-30T15:35:35Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=TIMEOUT,ssh22=OK,tcp443=OK
+2026-06-30T15:40:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
