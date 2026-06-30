@@ -1992,3 +1992,4 @@
 2026-06-30T17:50:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-30T17:55:36Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-30T18:00:57Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-30T18:05:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
