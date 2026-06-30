@@ -1980,3 +1980,4 @@
 2026-06-30T16:50:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-30T16:55:26Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-06-30T17:00:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-06-30T17:05:39Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
