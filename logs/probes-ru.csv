@@ -2219,3 +2219,4 @@
 2026-07-01T12:45:52Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-07-01T12:50:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-01T12:55:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-01T13:01:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
