@@ -2221,3 +2221,4 @@
 2026-07-01T12:55:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-01T13:01:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-01T13:05:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-01T13:10:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
