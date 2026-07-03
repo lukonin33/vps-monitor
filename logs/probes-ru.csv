@@ -2908,3 +2908,4 @@
 2026-07-03T22:10:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-03T22:15:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-03T22:20:24Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-03T22:25:20Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
