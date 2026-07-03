@@ -568,3 +568,4 @@
 2026-07-03T11:56:49Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-07-03T14:27:29Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-07-03T16:08:16Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
+2026-07-03T17:48:07Z,zavod=401,survey=200,brand=200,smm=200,ssh22=FAIL,tcp443=FAIL
