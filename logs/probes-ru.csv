@@ -3049,3 +3049,4 @@
 2026-07-04T09:55:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-04T10:00:53Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-04T10:05:24Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-04T10:10:25Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
