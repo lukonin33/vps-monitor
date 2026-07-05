@@ -3497,3 +3497,4 @@
 2026-07-05T23:15:25Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-05T23:20:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-05T23:25:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-05T23:30:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
