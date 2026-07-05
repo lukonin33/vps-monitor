@@ -3238,3 +3238,4 @@
 2026-07-05T01:40:37Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-05T01:45:34Z,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-05T01:50:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-05T01:55:24Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
