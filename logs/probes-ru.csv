@@ -4045,3 +4045,4 @@
 2026-07-07T20:55:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T21:00:41Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T21:05:41Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-07T21:10:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
