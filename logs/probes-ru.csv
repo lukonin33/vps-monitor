@@ -3855,3 +3855,4 @@
 2026-07-07T05:05:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T05:10:51Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T05:15:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-07-07T05:20:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
