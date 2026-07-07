@@ -4060,3 +4060,4 @@
 2026-07-07T22:10:51Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T22:15:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T22:20:27Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-07T22:25:23Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
