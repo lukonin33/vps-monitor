@@ -3858,3 +3858,4 @@
 2026-07-07T05:20:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T05:25:29Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-07-07T05:30:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-07T05:35:21Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
