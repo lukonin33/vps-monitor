@@ -4318,3 +4318,4 @@
 2026-07-08T19:40:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-08T19:45:35Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-07-08T19:50:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-08T19:55:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
