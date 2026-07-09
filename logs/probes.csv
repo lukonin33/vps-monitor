@@ -638,3 +638,4 @@
 2026-07-09T02:27:31Z,zavod=401,survey=200,brand=200,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-07-09T06:27:29Z,zavod=401,survey=200,brand=200,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-07-09T10:05:19Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
+2026-07-09T12:45:31Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
