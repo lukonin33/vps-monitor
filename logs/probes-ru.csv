@@ -4701,3 +4701,4 @@
 2026-07-10T03:50:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-10T03:55:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-10T04:00:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-07-10T04:05:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
