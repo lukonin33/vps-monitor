@@ -5275,3 +5275,4 @@
 2026-07-12T04:10:35Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-12T04:15:35Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-12T04:20:34Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-12T04:25:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
