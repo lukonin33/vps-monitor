@@ -5661,3 +5661,4 @@
 2026-07-13T12:35:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-13T12:40:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-13T12:45:27Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-13T12:50:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
