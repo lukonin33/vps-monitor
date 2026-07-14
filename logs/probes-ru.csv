@@ -5830,3 +5830,4 @@
 2026-07-14T02:45:51Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-14T02:50:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-14T02:55:43Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-14T03:01:06Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
