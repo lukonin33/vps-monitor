@@ -6492,3 +6492,4 @@
 2026-07-16T10:15:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-16T10:20:45Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-16T10:25:23Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-16T10:30:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
