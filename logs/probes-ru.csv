@@ -6835,3 +6835,4 @@
 2026-07-17T15:00:46Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-17T15:05:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-17T15:10:38Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-17T15:15:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
