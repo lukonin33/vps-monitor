@@ -7535,3 +7535,4 @@
 2026-07-20T02:25:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-20T02:30:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-20T02:35:28Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-20T02:40:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
