@@ -7883,3 +7883,4 @@
 2026-07-21T07:25:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-21T07:30:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-21T07:35:23Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-21T07:40:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
