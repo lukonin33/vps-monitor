@@ -7819,3 +7819,4 @@
 2026-07-21T02:05:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-21T02:10:43Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-07-21T02:15:53Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-07-21T02:20:23Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
