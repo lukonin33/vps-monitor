@@ -8325,3 +8325,4 @@
 2026-07-22T20:25:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-22T20:30:45Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-07-22T20:35:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-22T20:40:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
