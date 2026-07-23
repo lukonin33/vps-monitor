@@ -8448,3 +8448,4 @@
 2026-07-23T06:45:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-23T06:50:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-23T06:55:23Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-23T07:00:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
