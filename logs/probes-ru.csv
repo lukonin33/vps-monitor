@@ -8832,3 +8832,4 @@
 2026-07-24T14:55:45Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-07-24T15:00:58Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-24T15:05:29Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-24T15:10:28Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
