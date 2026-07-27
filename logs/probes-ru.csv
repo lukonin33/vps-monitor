@@ -9688,3 +9688,4 @@
 2026-07-27T14:15:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-27T14:20:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-27T14:25:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-27T14:30:38Z,zavod=TIMEOUT,survey=200,brand=TIMEOUT,smm=TIMEOUT,ssh22=OK,tcp443=OK
