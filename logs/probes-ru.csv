@@ -9790,3 +9790,4 @@
 2026-07-27T22:45:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-27T22:50:26Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-27T22:55:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-27T23:00:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
