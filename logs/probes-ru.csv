@@ -9743,3 +9743,4 @@
 2026-07-27T18:50:28Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-27T18:55:22Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-27T19:00:58Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-27T19:05:25Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
