@@ -9839,3 +9839,4 @@
 2026-07-28T02:50:44Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-28T02:55:34Z,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-28T03:00:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-28T03:05:44Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
