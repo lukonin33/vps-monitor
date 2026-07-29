@@ -10090,3 +10090,4 @@
 2026-07-28T23:45:52Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-28T23:50:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-07-28T23:55:39Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-07-29T00:00:59Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
