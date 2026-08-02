@@ -11319,3 +11319,4 @@
 2026-08-02T06:45:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-02T06:50:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-02T06:55:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-02T07:00:57Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
