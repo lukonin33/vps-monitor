@@ -11838,3 +11838,4 @@
 2026-08-04T02:20:38Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-08-04T02:25:35Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-08-04T02:30:40Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-04T02:35:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
