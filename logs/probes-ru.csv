@@ -12309,3 +12309,4 @@
 2026-08-05T17:45:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-05T17:50:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-05T17:55:41Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-08-05T18:01:04Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
