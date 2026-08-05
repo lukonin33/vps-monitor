@@ -12148,3 +12148,4 @@
 2026-08-05T04:20:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-05T04:25:36Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-05T04:30:32Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-05T04:35:44Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
