@@ -12398,3 +12398,4 @@
 2026-08-06T01:15:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-06T01:20:35Z,zavod=TIMEOUT,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-08-06T01:25:39Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-08-06T01:30:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
