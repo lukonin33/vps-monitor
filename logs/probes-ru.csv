@@ -12441,3 +12441,4 @@
 2026-08-06T04:50:36Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-06T04:55:22Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-06T05:00:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-06T05:10:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
