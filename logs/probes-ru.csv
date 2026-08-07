@@ -12845,3 +12845,4 @@
 2026-08-07T14:45:40Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-08-07T14:50:49Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-08-07T14:55:23Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-07T15:01:03Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
