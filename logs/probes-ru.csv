@@ -345,3 +345,4 @@
 2026-08-09T06:55:28Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-08-09T07:00:48Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-09T07:05:46Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-09T07:10:22Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
