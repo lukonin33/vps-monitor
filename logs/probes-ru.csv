@@ -1943,3 +1943,4 @@
 2026-08-14T21:30:31Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-14T21:35:47Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-14T21:40:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-14T21:45:33Z,zavod=TIMEOUT,survey=200,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
