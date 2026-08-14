@@ -1948,3 +1948,4 @@
 2026-08-14T21:55:34Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-14T22:01:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-14T22:05:39Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-14T22:10:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
