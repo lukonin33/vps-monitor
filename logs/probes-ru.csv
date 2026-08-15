@@ -2020,3 +2020,4 @@
 2026-08-15T03:55:40Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-15T04:00:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-15T04:05:49Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-08-15T04:10:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
