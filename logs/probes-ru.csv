@@ -2015,3 +2015,4 @@
 2026-08-15T03:30:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-15T03:35:28Z,zavod=401,survey=200,brand=TIMEOUT,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-08-15T03:40:44Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-15T03:45:50Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
