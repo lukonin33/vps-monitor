@@ -1973,3 +1973,4 @@
 2026-08-15T00:01:06Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-15T00:05:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-15T00:10:25Z,zavod=401,survey=200,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
+2026-08-15T00:15:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
