@@ -3375,3 +3375,4 @@
 2026-08-19T21:50:40Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-19T21:55:41Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-19T22:00:46Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-19T22:05:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
