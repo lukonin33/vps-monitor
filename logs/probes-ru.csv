@@ -3715,3 +3715,4 @@
 2026-08-21T02:10:31Z,zavod=401,survey=200,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-08-21T02:15:42Z,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-21T02:20:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-21T02:25:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
