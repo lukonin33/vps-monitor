@@ -1541,3 +1541,4 @@
 2026-08-23T07:40:18Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-08-23T08:02:40Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
 2026-08-23T08:44:44Z,zavod=401,survey=200,brand=200,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-08-23T09:12:57Z,zavod=401,survey=200,brand=200,smm=200,ssh22=OK,tcp443=OK
