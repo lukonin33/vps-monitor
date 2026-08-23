@@ -4513,3 +4513,4 @@
 2026-08-23T21:00:58Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-23T21:05:31Z,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-23T21:10:32Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-23T21:15:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
