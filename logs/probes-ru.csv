@@ -4818,3 +4818,4 @@
 2026-08-24T22:25:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-24T22:31:00Z,zavod=TIMEOUT,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-24T22:35:33Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-24T22:40:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
