@@ -5983,3 +5983,4 @@
 2026-08-28T23:30:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-28T23:35:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-28T23:40:40Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-28T23:45:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
