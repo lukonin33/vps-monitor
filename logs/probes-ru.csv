@@ -6199,3 +6199,4 @@
 2026-08-29T17:30:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-29T17:35:21Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-29T17:40:53Z,zavod=401,survey=TIMEOUT,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
+2026-08-29T17:45:23Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
