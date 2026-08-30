@@ -6460,3 +6460,4 @@
 2026-08-30T15:15:41Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-08-30T15:20:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-30T15:25:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-30T15:30:40Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
