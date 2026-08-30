@@ -6448,3 +6448,4 @@
 2026-08-30T14:15:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-30T14:20:43Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-30T14:25:22Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-30T14:30:59Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
