@@ -6685,3 +6685,4 @@
 2026-08-31T10:00:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-08-31T10:05:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-08-31T10:10:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-08-31T10:15:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
