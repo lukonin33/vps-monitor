@@ -6903,3 +6903,4 @@
 2026-09-01T04:10:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-01T04:15:52Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-09-01T04:20:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-01T04:25:21Z,zavod=401,survey=TIMEOUT,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
