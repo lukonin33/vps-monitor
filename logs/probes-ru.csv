@@ -8039,3 +8039,4 @@
 2026-09-05T03:00:46Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-05T03:05:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-05T03:10:34Z,zavod=TIMEOUT,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-09-05T03:15:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
