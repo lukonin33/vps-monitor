@@ -8149,3 +8149,4 @@
 2026-09-05T12:10:39Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-05T12:15:51Z,zavod=401,survey=TIMEOUT,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-09-05T12:20:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-05T12:25:29Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
