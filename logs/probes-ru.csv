@@ -8268,3 +8268,4 @@
 2026-09-05T23:55:45Z,zavod=TIMEOUT,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-09-06T00:01:08Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-06T00:05:48Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-06T00:10:39Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
