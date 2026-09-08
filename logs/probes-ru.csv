@@ -9118,3 +9118,4 @@
 2026-09-08T23:30:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-08T23:35:25Z,zavod=401,survey=200,brand=TIMEOUT,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-09-08T23:40:31Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-08T23:45:28Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
