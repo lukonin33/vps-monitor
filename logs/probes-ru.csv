@@ -9260,3 +9260,4 @@
 2026-09-09T11:20:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-09T11:25:41Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-09T11:30:35Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-09-09T11:35:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
