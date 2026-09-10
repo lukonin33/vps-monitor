@@ -9673,3 +9673,4 @@
 2026-09-10T22:05:53Z,zavod=TIMEOUT,survey=TIMEOUT,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-09-10T22:10:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-10T22:15:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-10T22:20:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
