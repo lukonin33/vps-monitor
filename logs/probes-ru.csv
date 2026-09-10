@@ -9503,3 +9503,4 @@
 2026-09-10T07:35:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-10T07:40:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-10T07:45:47Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-10T07:50:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
