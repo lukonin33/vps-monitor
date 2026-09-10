@@ -9470,3 +9470,4 @@
 2026-09-10T04:50:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-10T04:55:50Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-09-10T05:00:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-10T05:05:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
