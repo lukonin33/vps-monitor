@@ -9909,3 +9909,4 @@
 2026-09-11T19:40:34Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
 2026-09-11T19:45:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-11T19:50:42Z,zavod=401,survey=TIMEOUT,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-09-11T19:55:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
