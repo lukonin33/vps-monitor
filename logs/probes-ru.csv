@@ -10102,3 +10102,4 @@
 2026-09-12T11:45:34Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-12T11:50:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-12T11:55:48Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-12T12:01:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
