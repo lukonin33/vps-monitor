@@ -10173,3 +10173,4 @@
 2026-09-12T17:40:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-12T17:45:36Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-12T17:50:34Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-12T17:55:39Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
