@@ -10800,3 +10800,4 @@
 2026-09-14T22:00:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-14T22:05:28Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-14T22:10:40Z,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-14T22:15:32Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
