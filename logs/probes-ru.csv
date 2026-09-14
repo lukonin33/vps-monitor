@@ -10540,3 +10540,4 @@
 2026-09-14T00:15:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-14T00:20:44Z,zavod=TIMEOUT,survey=TIMEOUT,brand=405,smm=TIMEOUT,ssh22=OK,tcp443=OK
 2026-09-14T00:25:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-14T00:30:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
