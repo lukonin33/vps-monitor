@@ -11344,3 +11344,4 @@
 2026-09-16T20:01:10Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-16T20:05:26Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-16T20:10:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-16T20:15:57Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
