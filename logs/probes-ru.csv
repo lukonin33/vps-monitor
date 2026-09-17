@@ -11565,3 +11565,4 @@
 2026-09-17T14:25:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-17T14:30:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-17T14:35:33Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-17T14:40:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
