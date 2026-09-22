@@ -12838,3 +12838,4 @@
 2026-09-22T02:15:46Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-22T02:20:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-22T02:25:37Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-22T02:30:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
