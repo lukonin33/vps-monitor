@@ -12810,3 +12810,4 @@
 2026-09-21T23:55:40Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-22T00:01:05Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-22T00:05:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-22T00:10:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
