@@ -1989,3 +1989,4 @@
 2026-09-29T12:35:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-29T12:40:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-09-29T12:45:58Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-09-29T12:51:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
