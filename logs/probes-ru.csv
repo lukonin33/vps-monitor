@@ -2610,3 +2610,4 @@
 2026-10-01T16:20:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-01T16:25:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-01T16:30:58Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-01T16:35:49Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
