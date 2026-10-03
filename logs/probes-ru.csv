@@ -3028,3 +3028,4 @@
 2026-10-03T03:15:39Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-03T03:20:56Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-03T03:25:50Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-03T03:30:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
