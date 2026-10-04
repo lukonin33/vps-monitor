@@ -3419,3 +3419,4 @@
 2026-10-04T12:00:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-04T12:05:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-04T12:10:49Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-04T12:15:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
