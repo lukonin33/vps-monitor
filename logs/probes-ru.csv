@@ -3438,3 +3438,4 @@
 2026-10-04T13:35:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-04T13:40:44Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-04T13:45:34Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-04T13:50:55Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
