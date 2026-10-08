@@ -4518,3 +4518,4 @@
 2026-10-08T08:05:58Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-08T08:10:58Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-10-08T08:16:01Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-08T08:21:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
