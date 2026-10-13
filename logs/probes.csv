@@ -1933,3 +1933,4 @@
 2026-10-12T18:58:34Z,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
 2026-10-13T01:15:22Z,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
 2026-10-13T07:49:10Z,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
+2026-10-13T15:24:55Z,zavod=401,survey=200,brand=200,smm=301,ssh22=FAIL,tcp443=FAIL
