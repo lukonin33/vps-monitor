@@ -6151,3 +6151,4 @@
 2026-10-20T15:20:43Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-20T15:25:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-20T15:31:02Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-20T15:35:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
