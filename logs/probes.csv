@@ -1995,3 +1995,4 @@
 2026-10-23T01:41:59Z,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
 2026-10-23T06:32:57Z,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
 2026-10-23T12:04:12Z,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
+2026-10-23T17:01:55Z,zavod=401,survey=200,brand=200,smm=301,ssh22=FAIL,tcp443=FAIL
