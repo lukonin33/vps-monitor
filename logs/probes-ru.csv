@@ -7752,3 +7752,4 @@
 2026-10-26T10:00:52Z,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-26T10:05:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-26T10:10:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-26T10:15:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
