@@ -7906,3 +7906,4 @@
 2026-10-26T22:55:36Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-10-26T23:00:37Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-26T23:05:30Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-26T23:10:23Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
