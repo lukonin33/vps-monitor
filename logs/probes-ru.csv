@@ -8092,3 +8092,4 @@
 2026-10-27T17:15:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-27T17:20:33Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-27T17:25:46Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-27T17:30:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
