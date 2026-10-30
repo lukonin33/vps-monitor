@@ -8813,3 +8813,4 @@
 2026-10-30T05:20:30Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-30T05:25:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-30T05:30:52Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-30T05:35:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
