@@ -9104,3 +9104,4 @@
 2026-10-31T05:45:50Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-31T05:50:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-10-31T05:55:35Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-10-31T06:01:09Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
