@@ -9699,3 +9699,4 @@
 2026-11-02T07:20:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-02T07:25:28Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-02T07:30:57Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-11-02T07:35:50Z,zavod=TIMEOUT,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
