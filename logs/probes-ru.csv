@@ -10105,3 +10105,4 @@
 2026-11-03T17:15:55Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-03T17:20:38Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-03T17:25:47Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=OK,tcp443=OK
+2026-11-03T17:30:35Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
