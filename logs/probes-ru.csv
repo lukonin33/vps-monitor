@@ -10335,3 +10335,4 @@
 2026-11-04T12:40:54Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-04T12:45:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-04T12:50:35Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-11-04T12:55:52Z,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
