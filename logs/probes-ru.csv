@@ -10683,3 +10683,4 @@
 2026-11-05T17:45:42Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-05T17:50:47Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-05T17:55:48Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-11-05T18:01:05Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
