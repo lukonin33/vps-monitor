@@ -11160,3 +11160,4 @@
 2026-11-07T09:50:48Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-07T09:55:22Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-07T10:00:38Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-11-07T10:05:46Z,zavod=401,survey=200,brand=TIMEOUT,smm=200,ssh22=FAIL,tcp443=FAIL
