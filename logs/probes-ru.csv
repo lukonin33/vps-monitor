@@ -70,3 +70,4 @@
 2026-11-13T15:35:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-13T15:40:49Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-13T15:45:55Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-11-13T15:51:00Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
