@@ -461,3 +461,4 @@
 2026-11-15T00:15:45Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-15T00:20:40Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-15T00:25:31Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-11-15T00:31:02Z,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
