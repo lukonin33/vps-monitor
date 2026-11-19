@@ -1705,3 +1705,4 @@
 2026-11-19T08:05:35Z,zavod=401,survey=TIMEOUT,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-19T08:10:53Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
 2026-11-19T08:15:41Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
+2026-11-19T08:20:27Z,zavod=401,survey=200,brand=405,smm=200,ssh22=FAIL,tcp443=FAIL
