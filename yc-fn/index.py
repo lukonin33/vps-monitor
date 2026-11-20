@@ -1,5 +1,5 @@
 """
-RU-side external probe for VPS 5.129.207.254 stability monitoring.
+RU-side external probe for VPS 186.246.14.127 stability monitoring.
 Runs as Yandex Cloud Function on timer trigger every 5 min.
 Probes 4 plyeyada domains + SSH22 + TCP443, commits CSV to logs/probes-ru.csv
 in github.com/lukonin33/vps-monitor via Contents API.
@@ -33,7 +33,7 @@ import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
-VPS_IP = "5.129.207.254"
+VPS_IP = "186.246.14.127"
 DOMAINS = {
     "zavod": "https://zavod.smm-ministr.ru/",
     "survey": "https://survey.smm-ministr.ru/",
@@ -212,7 +212,7 @@ def handler(event, context):
     # --- Main probe (existing schema, dashboard compat) ---
     main_results = run_main_probes()
     main_keys = list(DOMAINS.keys()) + list(TCP_PORTS.keys())
-    main_line = f"{ts}," + ",".join(f"{k}={main_results[k]}" for k in main_keys)
+    main_line = f"{ts},target_ip={VPS_IP}," + ",".join(f"{k}={main_results[k]}" for k in main_keys)
 
     # --- Candidate probe (only if VPS_CANDIDATE_IPS is set) ---
     candidate_line: str | None = None

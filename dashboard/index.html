@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VPS 5.129.207.254 — Stability Dashboard</title>
+<title>VPS 186.246.14.127 — Stability Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.6/dist/chart.umd.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js" crossorigin="anonymous"></script>
 <style>
@@ -69,7 +69,7 @@
 <body>
 
 <header>
-  <h1>VPS 5.129.207.254 — Stability Dashboard</h1>
+  <h1>VPS 186.246.14.127 — Stability Dashboard</h1>
   <div class="controls">
     <label>Time range:</label>
     <select id="range">
@@ -98,7 +98,7 @@
 
 <section class="panels">
   <div class="panel">
-    <h2>GitHub Actions (US/EU vantage) — every 5min</h2>
+    <h2>GitHub Actions (US/EU) — target 5min, best effort</h2>
     <div class="chart-box"><canvas id="chartGA"></canvas></div>
     <div class="legend">
       <span class="ok">200/3xx — alive</span>
@@ -120,9 +120,9 @@
 
 <section style="margin-top: 16px;">
   <div class="panel">
-    <h2>Candidate IPs comparison — Phase 6.5 migration test</h2>
+    <h2>Действующие IP и существующий тестовый адрес</h2>
     <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
-      RU vantage (Yandex Cloud) probes TCP 22 + TCP 443 на 4 IP каждые 5 мин. Текущий primary 5.129.207.254 даёт baseline; кандидаты сравниваются по uptime % для решения о winner.
+      Основной IP186.246.14.127, запасной186.246.14.113. Прежний5.129.207.254 отключён; его исторические отказы не относятся к текущему VPS. Проценты отражают только записанные пробы.
     </p>
     <div class="status-bar" id="candidatesStatus"></div>
     <div class="chart-box" style="margin-top: 12px;"><canvas id="chartCandidates"></canvas></div>
@@ -135,9 +135,9 @@
 
 <section style="margin-top: 16px;">
   <div class="panel">
-    <h2>Triangulation matrix — H1 vs H2 hypothesis discriminator</h2>
+    <h2>Сопоставление свежих замеров</h2>
     <p style="font-size: 12px; color: var(--dim); margin-bottom: 8px;">
-      Last 30 timestamps. Both red = H1 (VPS down). Only RU red = H2 (RU-route blocked). Only US red = H2-inverse (rare).
+      Последние30 отметок. Сопоставлять следует свежие близкие по времени замеры. Ошибки из одной или двух точек сами по себе не доказывают ни остановку VPS, ни блокировку маршрута.
     </p>
     <div class="matrix" id="matrix"></div>
   </div>
@@ -158,6 +158,8 @@ const SOURCES = {
   yc:         { url: '../logs/probes-ru.csv',         label: 'RU (Yandex Cloud)' },
   candidates: { url: '../logs/probes-candidates.csv', label: 'Candidate IPs (RU vantage)' },
 };
+const CURRENT_IP = '186.246.14.127';
+const LEGACY_IP = '5.129.207.254';
 const ENDPOINT_KEYS = ['zavod', 'survey', 'brand', 'smm', 'ssh22', 'tcp443'];
 const COLORS = {
   zavod:  '#60a5fa',
@@ -168,14 +170,11 @@ const COLORS = {
   tcp443: '#fb7185',
 };
 
-// Candidate IPs for Phase 6.5 migration test. Order = display order.
-// Primary 5.129.207.254 data comes from probes-ru.csv (ssh22 column);
-// the rest come from probes-candidates.csv (<ip>_22 column).
+// Existing primary/reserve/test series; retired address stays in CSV history only.
 const CANDIDATES = [
-  { ip: '5.129.207.254',  label: '5.129.207.254 (current primary, NSK)',  zone: 'NSK-1', source: 'main',  color: '#94a3b8' },
-  { ip: '92.53.115.87',   label: '92.53.115.87 (SPB-3 test, AS9123)',     zone: 'SPB-3', source: 'cand',  color: '#22c55e' },
-  { ip: '186.246.14.127', label: '186.246.14.127 (NSK new, AS57494)',     zone: 'NSK-1', source: 'cand',  color: '#a78bfa' },
-  { ip: '186.246.14.113', label: '186.246.14.113 (NSK new, AS57494)',     zone: 'NSK-1', source: 'cand',  color: '#f472b6' },
+  { ip: '186.246.14.127', label: '186.246.14.127 (основной, NSK)', zone: 'NSK-1 · основной', source: 'main', color: '#a78bfa' },
+  { ip: '186.246.14.113', label: '186.246.14.113 (запасной, NSK)', zone: 'NSK-1 · запасной', source: 'cand', color: '#f472b6' },
+  { ip: '92.53.115.87', label: '92.53.115.87 (существующий тест SPB)', zone: 'SPB-3 · тест', source: 'cand', color: '#22c55e' },
 ];
 
 // ============================================================
@@ -201,7 +200,10 @@ function parseCsvLine(line) {
     const v = p.substring(eqIdx + 1).trim();
     if (k && v) values[k] = v;
   }
-  return { ts, values };
+  const targetIp = values.target_ip || LEGACY_IP;
+  const tcp = { tcp22: values.ssh22 || 'NA', tcp443: values.tcp443 || 'NA' };
+  if (targetIp !== CURRENT_IP) { values.ssh22 = 'NA'; values.tcp443 = 'NA'; }
+  return { ts, values, targetIp, tcp };
 }
 
 function parseCsv(text) {
@@ -336,35 +338,34 @@ function makeStatusCard(label, row) {
   const v = row?.values || {};
   const states = ENDPOINT_KEYS.map(k => classify(v[k] || 'NA'));
   const failCount = states.filter(s => s === 'fail').length;
-  const cls = failCount === 0 ? 'ok' : failCount >= 3 ? 'fail' : 'warn';
+  const missing = states.filter(s => s === 'na').length;
   const ago = row ? Math.round((Date.now() - row.ts.getTime()) / 60000) : null;
-  const summary = ENDPOINT_KEYS.map(k => `${k}=${v[k] || 'NA'}`).join(' ');
+  const stale = ago === null || ago > 15 || ago < -1;
+  const cls = stale || missing ? 'warn' : failCount === 0 ? 'ok' : failCount >= 3 ? 'fail' : 'warn';
+  const value = stale ? 'Данные устарели' : missing ? 'Неполные данные' : failCount ? `${failCount}/${ENDPOINT_KEYS.length} ошибок` : '✓ Ответы получены';
   return el('div', { cls: `status-card ${cls}` }, [
     el('div', { cls: 'label', text: label }),
-    el('div', { cls: 'value', text: failCount === 0 ? '✓ All up' : `${failCount}/${ENDPOINT_KEYS.length} down` }),
-    el('div', { cls: 'meta', text: row ? `${row.ts.toISOString().substring(11, 19)}Z (${ago}m ago)` : 'no data' }),
-    el('div', { cls: 'summary', text: summary }),
+    el('div', { cls: 'value', text: value }),
+    el('div', { cls: 'meta', text: row ? `${row.ts.toISOString()} (${ago}m ago), TCP target ${row.targetIp}` : 'no data' }),
+    el('div', { cls: 'summary', text: ENDPOINT_KEYS.map(k => `${k}=${v[k] || 'NA'}`).join(' ') }),
   ]);
 }
 
 function makeTriangulationCard(lastGa, lastYc) {
-  if (!lastGa || !lastYc) {
-    return el('div', { cls: 'status-card warn' }, [
-      el('div', { cls: 'label', text: 'Triangulation' }),
-      el('div', { cls: 'value', text: 'no data' }),
-    ]);
+  const fresh = row => row && Date.now() - row.ts.getTime() >= -60000 && Date.now() - row.ts.getTime() <= 15 * 60000;
+  const comparable = fresh(lastGa) && fresh(lastYc) && Math.abs(lastGa.ts - lastYc.ts) <= 10 * 60000 &&
+    [lastGa, lastYc].every(row => ENDPOINT_KEYS.every(k => classify(row.values[k] || 'NA') !== 'na'));
+  let verdict = 'Нет свежей сопоставимой пары', cls = 'warn';
+  if (comparable) {
+    const gaFail = ENDPOINT_KEYS.some(k => classify(lastGa.values[k] || 'NA') === 'fail');
+    const ycFail = ENDPOINT_KEYS.some(k => classify(lastYc.values[k] || 'NA') === 'fail');
+    verdict = gaFail && ycFail ? 'Ошибки из двух точек' : ycFail ? 'Ошибки из РФ' : gaFail ? 'Ошибки из US/EU' : '✓ Ответы из двух точек';
+    cls = gaFail && ycFail ? 'fail' : gaFail || ycFail ? 'warn' : 'ok';
   }
-  const gaFail = ENDPOINT_KEYS.some(k => classify(lastGa.values[k] || 'NA') === 'fail');
-  const ycFail = ENDPOINT_KEYS.some(k => classify(lastYc.values[k] || 'NA') === 'fail');
-  let verdict, cls;
-  if (gaFail && ycFail) { verdict = 'H1 — VPS down'; cls = 'fail'; }
-  else if (!gaFail && ycFail) { verdict = 'H2 — RU route blocked'; cls = 'warn'; }
-  else if (gaFail && !ycFail) { verdict = 'H2-inverse (rare)'; cls = 'warn'; }
-  else { verdict = '✓ Norm'; cls = 'ok'; }
   return el('div', { cls: `status-card ${cls}` }, [
-    el('div', { cls: 'label', text: 'Triangulation' }),
+    el('div', { cls: 'label', text: 'Сопоставление' }),
     el('div', { cls: 'value', text: verdict }),
-    el('div', { cls: 'meta', text: 'latest probes cross-reference' }),
+    el('div', { cls: 'meta', text: 'Наблюдение, не установленная причина сбоя' }),
   ]);
 }
 
@@ -379,38 +380,19 @@ function renderStatusBar(gaRows, ycRows) {
 }
 
 // Build unified per-IP timeseries: { '<ip>': [{ts, tcp22, tcp443}], ... }
-// Merges main YC probe data (for primary 5.129.207.254) with candidate probe data.
+// Merge explicit current targets with existing per-IP samples; never relabel legacy rows.
 function buildCandidateSeries(ycRows, candRows) {
-  const series = {};
-  for (const c of CANDIDATES) series[c.ip] = [];
-
-  // Primary IP: pull ssh22/tcp443 from main YC probes
-  const primary = CANDIDATES.find(c => c.source === 'main');
-  if (primary) {
-    for (const r of ycRows) {
-      series[primary.ip].push({
-        ts: r.ts,
-        tcp22: r.values.ssh22 || 'NA',
-        tcp443: r.values.tcp443 || 'NA',
-      });
-    }
+  const maps = Object.fromEntries(CANDIDATES.map(c => [c.ip, new Map()]));
+  for (const r of ycRows) {
+    if (maps[r.targetIp]) maps[r.targetIp].set(r.ts.getTime(), { ts: r.ts, ...r.tcp });
   }
-
-  // Candidate IPs: pull <ip>_22 and <ip>_443 from candidate probes
   for (const r of candRows) {
     for (const c of CANDIDATES) {
-      if (c.source !== 'cand') continue;
       const data = r.perIp[c.ip];
-      if (!data) continue;
-      series[c.ip].push({
-        ts: r.ts,
-        tcp22: data.tcp22 || 'NA',
-        tcp443: data.tcp443 || 'NA',
-      });
+      if (data) maps[c.ip].set(r.ts.getTime(), { ts: r.ts, tcp22: data.tcp22 || 'NA', tcp443: data.tcp443 || 'NA' });
     }
   }
-
-  return series;
+  return Object.fromEntries(CANDIDATES.map(c => [c.ip, [...maps[c.ip].values()].sort((a, b) => a.ts - b.ts)]));
 }
 
 function computeUptimePct(rows) {
@@ -433,7 +415,7 @@ function renderCandidatesStatus(series) {
     const card = el('div', { cls: `status-card ${cardClass}` }, [
       el('div', { cls: 'label', text: c.zone }),
       el('div', { cls: 'value', text: c.ip }),
-      el('div', { cls: 'meta', text: uptimePct === null ? 'no data' : `uptime ${uptimePct}% (${rows.length} probes)` }),
+      el('div', { cls: 'meta', text: uptimePct === null ? 'no data' : `SSH sample success ${uptimePct}% (${rows.length} probes)` }),
       el('div', { cls: 'meta', text: latest
         ? `latest tcp22=${latest.tcp22} tcp443=${latest.tcp443} (${ago}m ago)`
         : 'no probes yet' }),

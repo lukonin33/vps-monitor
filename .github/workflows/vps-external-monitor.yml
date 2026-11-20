@@ -10,7 +10,7 @@ name: VPS External Monitor
 
 on:
   schedule:
-    - cron: '*/5 * * * *'   # every 5 min
+    - cron: '2-59/5 * * * *' # every 5 min, away from the hour boundary
   workflow_dispatch:
 
 permissions:
@@ -24,6 +24,8 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     timeout-minutes: 3
+    env:
+      VPS_IP: 186.246.14.127
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,10 +41,10 @@ jobs:
           BRAND=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://brand.smm-ministr.ru/ 2>/dev/null || echo "TIMEOUT")
           SMM=$(curl -sS -o /dev/null -w "%{http_code}" --max-time 10 https://krutly.com/ 2>/dev/null || echo "TIMEOUT")
           # SSH port reachability (TCP-only, no auth)
-          SSH=$(timeout 5 bash -c '</dev/tcp/5.129.207.254/22' 2>/dev/null && echo "OK" || echo "FAIL")
+          SSH=$(timeout 5 bash -c '</dev/tcp/${VPS_IP}/22' 2>/dev/null && echo "OK" || echo "FAIL")
           # nginx HTTPS port
-          PORT443=$(timeout 5 bash -c '</dev/tcp/5.129.207.254/443' 2>/dev/null && echo "OK" || echo "FAIL")
-          LINE="$TS,zavod=$ZAVOD,survey=$SURVEY,brand=$BRAND,smm=$SMM,ssh22=$SSH,tcp443=$PORT443"
+          PORT443=$(timeout 5 bash -c '</dev/tcp/${VPS_IP}/443' 2>/dev/null && echo "OK" || echo "FAIL")
+          LINE="$TS,target_ip=$VPS_IP,zavod=$ZAVOD,survey=$SURVEY,brand=$BRAND,smm=$SMM,ssh22=$SSH,tcp443=$PORT443"
           echo "$LINE" >> logs/probes.csv
           echo "line=$LINE" >> "$GITHUB_OUTPUT"
           # Summary in run log
@@ -61,8 +63,16 @@ jobs:
           else
             git commit -m "probe ${{ steps.probe.outputs.line }}"
             # Retry push on race (another probe committed first)
+            pushed=false
             for i in 1 2 3; do
-              git pull --rebase origin main && git push origin main && break
+              if git pull --rebase origin main && git push origin main; then
+                pushed=true
+                break
+              fi
               sleep $((RANDOM % 5 + 1))
             done
+            if [ "$pushed" != true ]; then
+              echo 'Probe measured, but log publication failed after 3 attempts' >&2
+              exit 1
+            fi
           fi

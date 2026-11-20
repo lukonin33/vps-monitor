@@ -1,10 +1,12 @@
-# vps-monitor — external probes для VPS 5.129.207.254
+# vps-monitor — external probes для VPS 186.246.14.127
 
-**Два независимых vantage point** пингуют 4 домена плеяды + SSH/443 порты VPS каждые 5 минут:
+Актуально20.11.2026: основной IP186.246.14.127, запасной186.246.14.113. Старый5.129.207.254 отключён. Новые строки main CSV содержат target_ip; старые строки без него относятся к прежнему IP. История CSV сохраняется, отказы прежнего адреса не относятся к текущему.
+
+**Два независимых vantage point** пингуют 4 домена плеяды + SSH/443 порты VPS с целевым интервалом5минут (GitHub — best effort, возможны пропуски):
 
 | Vantage | Где работает | Output | Cron |
 |---|---|---|---|
-| **GitHub Actions** | Microsoft Azure DC (US/EU) | `logs/probes.csv` | `*/5 * * * *` |
+| **GitHub Actions** | Microsoft Azure DC (US/EU) | `logs/probes.csv` | `2-59/5 * * * *` |
 | **Yandex Cloud Function** | YC datacenters (РФ, ru-central1) | `logs/probes-ru.csv` | `0/5 * * * ? *` (Quartz) |
 
 **Цель triangulation:** разделить гипотезы H1 (VPS down — оба vantage FAIL) vs H2 (RU-route blocked — RU FAIL, US OK) для diagnostic'а chat-id `infra-vps-stability-monitoring-01`.
@@ -13,9 +15,9 @@
 
 | VPS-internal `pleyada-health.log` | External GitHub Actions (US/EU) `probes.csv` | YC Function (RU) `probes-ru.csv` | Гипотеза |
 |---|---|---|---|
-| FAIL | FAIL | FAIL | **H1 — VPS реально down** (OOM / crash) |
-| OK | OK | FAIL | **H2 confirmed — route from РФ blocked** (TSPU / РФ-провайдер) |
-| OK | FAIL | OK | **H2-inverse** — route from non-RU blocked (rare) |
+| FAIL | FAIL | FAIL | **Сбой виден из трёх точек** — причина не установлена |
+| OK | OK | FAIL | **Ошибка из РФ** — причина требует отдельной проверки |
+| OK | FAIL | OK | **Ошибка из US/EU** — причина не установлена |
 | OK | OK | OK | Норма |
 | OK | FAIL | FAIL | Network upstream Timeweb или DNS issue |
 
@@ -47,7 +49,7 @@ gh repo create lukonin33/vps-monitor --private --source=. --remote=origin --push
 
 ## Что писать в `logs/probes.csv`
 
-CSV формат: `TS,zavod=HTTP,survey=HTTP,brand=HTTP,smm=HTTP,ssh22=OK|FAIL,tcp443=OK|FAIL`
+CSV формат новых строк: `TS,target_ip=186.246.14.127,zavod=HTTP,survey=HTTP,brand=HTTP,smm=HTTP,ssh22=OK|FAIL,tcp443=OK|FAIL`
 
 Пример:
 ```
@@ -79,9 +81,9 @@ grep "T18:0" logs/probes.csv | head -5
 
 **Function:** `vps-monitor-ru` (id `d4esr5hbfer4196fdv0v` в folder `b1gte826dd4hvilbujvg`)
 **Service Account:** `vps-monitor-fn` (id `aje08etfrr9mn6kmb32b`) — роль `serverless.functions.invoker`
-**Trigger:** `vps-monitor-ru-5min` (id `a1sm9jvnselsm7t3e4po`) — cron `0/5 * * * ? *`
+**Trigger:** `vps-monitor-ru-5min` (id `a1spch1tl732gtdovj08`) — cron `0/5 * * * ? *`
 **Source:** `yc-fn/index.py` (Python 3.12, stdlib only)
-**Env vars:** `GITHUB_TOKEN` (fine-grained PAT с Contents R/W на этот repo) + `GITHUB_REPO=lukonin33/vps-monitor`
+**Env vars:** `LOCKBOX_SECRET_ID` (ссылка на существующий секрет), `GITHUB_REPO=lukonin33/vps-monitor`, `VPS_CANDIDATE_IPS` (существующие отдельные проверки127/113/SPB). PAT функция читает сама из Lockbox; оператор не извлекает payload.
 
 ### Redeploy code (без потери env vars)
 
@@ -92,7 +94,7 @@ grep "T18:0" logs/probes.csv | head -5
 2. «Создать в редакторе» из последней version → upload code → save
 3. UI копирует env из previous version automatically
 
-**Production-grade fix:** перевести GITHUB_TOKEN на Yandex Lockbox (function reads at runtime через lockbox.payloadViewer SA role). Тогда CLI redeploy не теряет secret.
+**Текущий режим:** PAT уже находится в Lockbox, функция читает его сама. При выпуске нужно сохранить service account, все три environment-ссылки/настройки, runtime, timeout, memory и logging. Публикация исходника в GitHub сама по себе не обновляет функцию. Предыдущую версию сохранять с rollback-тегом; никаких новых секретов или прав для исправления IP не нужно.
 
 ### Cleanup / disable
 
