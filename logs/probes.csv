@@ -2117,3 +2117,4 @@
 2026-11-20T08:41:13Z,zavod=401,survey=200,brand=200,smm=301,ssh22=FAIL,tcp443=FAIL
 2026-11-20T11:36:08Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
 2026-11-20T19:14:43Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
+2026-11-21T00:50:23Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=200,smm=301,ssh22=OK,tcp443=OK
