@@ -3549,3 +3549,4 @@
 2026-11-25T17:16:02Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-25T17:20:47Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-25T17:25:58Z,target_ip=186.246.14.127,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-11-25T17:31:19Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
