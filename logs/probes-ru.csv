@@ -3823,3 +3823,4 @@
 2026-11-26T16:05:42Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-26T16:10:50Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-26T16:16:01Z,target_ip=186.246.14.127,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-11-26T16:20:38Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
