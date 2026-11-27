@@ -4095,3 +4095,4 @@
 2026-11-27T14:50:46Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-27T14:55:42Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
 2026-11-27T15:01:26Z,target_ip=186.246.14.127,zavod=TIMEOUT,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
+2026-11-27T15:05:56Z,target_ip=186.246.14.127,zavod=401,survey=200,brand=405,smm=200,ssh22=OK,tcp443=OK
